@@ -3,7 +3,7 @@
     <head>
         <title>TS Network Importer</title>
         <meta charset="UTF-8">
-        <meta name="description" content="A tool to import railway networks into Train Simulator">
+        <meta name="description" content="Un outil pour importer des réseaux ferroviaires dans Train Simulator">
         <meta name="author" content="DUBROMEL Rémy">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="pictures/logoTSNI.png">
