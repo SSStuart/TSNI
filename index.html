@@ -7,7 +7,7 @@
         <meta name="author" content="DUBROMEL Rémy">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <link rel="icon" href="pictures/favicon.png">
-        <link rel="stylesheet" type="text/css" href="styles.css?v=<?php echo rand(0,1000)?>">
+        <link rel="stylesheet" type="text/css" href="styles.css?v=">
         <script src="https://kit.fontawesome.com/68225099a4.js" crossorigin="anonymous"></script>
         <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
         <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
@@ -16,38 +16,6 @@
     </head>
 
     <body onload="isPhone()">
-        <!--CONNEXION MYSQL-->
-            <?php
-                $servername = "sql106.byethost31.com";
-                $username = "b31_26395455";
-                $password = "kdSbe8pHbQ4r";
-                $dbname = "b31_26395455_TSNI";
-
-                // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
-
-                /*// Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
-                echo "Connected successfully";*/
-
-
-                #SUPRESSION DES FICHIERS DE + DE 1 JOURS
-                    //get all directory inside input directory using php RecursiveDirectoryIterator class.
-                    $iterator = new RecursiveDirectoryIterator('generatedFiles/');
-                    //get all files inside all directory itrations using php RecursiveIteratorIterator class.
-                    foreach(new RecursiveIteratorIterator($iterator) as $file){
-                        //check for files only.
-                        if(is_file($file)){
-                            //unlink file .
-                            if (time() - filemtime($file) >= 60 * 60 * 24) { // 1 days
-                                unlink($file);
-                            }
-                        }
-                    }
-            ?>
-        <!--FIN connexion MySQL-->
         <div class="backP2S"><a href="http://plein2sites.byethost31.com/P2S/" title="Retour Plein de sites"><i class="fas fa-chevron-left"></i>P2S</a></div>
         <div id="mobileInfo" style="display:none;">
             <i class="fas fa-mobile-alt"></i><br>
@@ -121,16 +89,6 @@
                     </details>
                     <div class="inputGrp"><input list="listLines" id="line" placeholder="Rechercher une ligne" size="85">
                     <datalist id="listLines">
-                        <?php
-                            $sql = "SELECT DISTINCT nomLigne FROM LinesNetworks";
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                while($row = $result->fetch_assoc()) {
-                                    echo '<option value="'.iconv("ISO-8859-1", "UTF-8", $row["nomLigne"]).'">';
-                                }
-                            }
-                        ?>
                     </datalist>
                     <button type="button" class="clearLine" onclick="clearLine()"><i class="fas fa-times"></i></button></div>
                     <button class="btnAddLine" type="button" onclick="addLine();validationFn()">Ajouter la ligne</button><br>
