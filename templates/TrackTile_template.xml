@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cRecordSet xmlns:d="http://www.kuju.com/TnT/2003/Delta" d:version="1.0" d:id="200859560"> <!-- id recordset ??-->
+	<Record>
+		{% for ruban in rubans %}
+			<Network-cNetworkRibbonUnstreamed-cCurveContainerUnstreamed d:id="{{ ruban.id }}"> <!-- string 9 digits-->
+				<RibbonID>
+					<Network-cNetworkRibbon-cCurveContainer-cID>
+						<RibbonID>
+							<cGUID>
+								<UUID>
+									<e d:type="sUInt64">{{ ruban.GUIDs[0] }}</e>
+									<e d:type="sUInt64">{{ ruban.GUIDs[1] }}</e>
+								</UUID>
+								<DevString d:type="cDeltaString">{{ ruban.GUIDs[2] }}</DevString>
+							</cGUID>
+						</RibbonID>
+						<NetworkTypeID> <!-- à considérer constant? ou plutot un element non varié en jeu durant le test-->
+							<cGUID>
+								<UUID>
+									<e d:type="sUInt64">4902272991866588709</e>
+									<e d:type="sUInt64">14017088955258244018</e>
+								</UUID>
+								<DevString d:type="cDeltaString">10330e25-5f50-4408-b20b-389b23b486c2</DevString>
+							</cGUID>
+						</NetworkTypeID>
+					</Network-cNetworkRibbon-cCurveContainer-cID>
+				</RibbonID>
+				<Curve>
+					{% for segment in ruban.segments %}
+						{% if ruban.sensCourbe == "ALIGNEMENT" %}
+						<cCurveStraight d:id="{{ segment.id }}">
+							<Length d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{	segment.longueur }}</Length> <!-- float precision: 4, altencoding mis à 0-->
+							<StartPos>
+								<cFarVector2>
+									<X> <!--(coordonnées X et Z au départ) -->
+										<cFarCoordinate>
+											<RouteCoordinate>
+												<cRouteCoordinate>
+													<Distance d:type="sInt32">{{ segment.X }}</Distance>
+												</cRouteCoordinate>
+											</RouteCoordinate>
+											<TileCoordinate>
+												<cTileCoordinate>
+													<Distance d:type="sFloat32"
+														d:alt_encoding="0000000000000000"
+														d:precision="string">{{ segment.segDepX }}</Distance> <!-- float precision: 3, altencoding mis à 0-->
+												</cTileCoordinate>
+											</TileCoordinate>
+										</cFarCoordinate>
+									</X>
+									<Z>
+										<cFarCoordinate>
+											<RouteCoordinate>
+												<cRouteCoordinate>
+													<Distance d:type="sInt32">{{ segment.Z}}</Distance>
+												</cRouteCoordinate>
+											</RouteCoordinate>
+											<TileCoordinate>
+												<cTileCoordinate>
+													<Distance d:type="sFloat32"
+														d:alt_encoding="0000000000000000"
+														d:precision="string">{{ segment.segDepZ }}</Distance> <!-- float precision: 3, altencoding mis à 0-->
+												</cTileCoordinate>
+											</TileCoordinate>
+										</cFarCoordinate>
+									</Z>
+								</cFarVector2>
+							</StartPos>
+							<StartTangent d:numElements="2" d:elementType="sFloat32" d:precision="string">{{ segment.angle.cos }} {{ segment.angle.sin }}</StartTangent>  <!-- float precision: 7 -->
+						</cCurveStraight>
+						{% else %}
+						<cCurveArc d:id="{{ segment.id }}">
+							<Curvature d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ ruban.rayonCourbe }}</Curvature> <!-- rayon(150m=0.00666667)??, float precision: 8-->
+							<Length d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ segment.longueur }}</Length>
+							<StartPos>
+								<cFarVector2>
+									<X>
+										<cFarCoordinate>
+											<RouteCoordinate>
+												<cRouteCoordinate>
+													<Distance d:type="sInt32">{{ segment.X }}</Distance>
+												</cRouteCoordinate>
+											</RouteCoordinate>
+											<TileCoordinate>
+												<cTileCoordinate>
+													<Distance d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ segment.segDepX }}</Distance>
+												</cTileCoordinate>
+											</TileCoordinate>
+										</cFarCoordinate>
+									</X>
+									<Z>
+										<cFarCoordinate>
+											<RouteCoordinate>
+												<cRouteCoordinate>
+													<Distance d:type="sInt32">{{ segment.Z }}</Distance>
+												</cRouteCoordinate>
+											</RouteCoordinate>
+											<TileCoordinate>
+												<cTileCoordinate>
+													<Distance d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ segment.segDepZ }}</Distance>
+												</cTileCoordinate>
+											</TileCoordinate>
+										</cFarCoordinate>
+									</Z>
+								</cFarVector2>
+							</StartPos>
+							<StartTangent d:numElements="2" d:elementType="sFloat32" d:precision="string">{{ segment.angle.cos }} {{ segment.angle.sin }}</StartTangent>
+							<CurveSign d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ (ruban.sensCourbe == "GAUCHE" ? '-1' : '1') }}</CurveSign>
+						</cCurveArc>
+						{% endif %}
+					{% endfor %}
+				</Curve>
+			</Network-cNetworkRibbonUnstreamed-cCurveContainerUnstreamed>
+		{% endfor %}
+	</Record>
+</cRecordSet>
