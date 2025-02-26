@@ -397,10 +397,7 @@ define("LOGGING_LEVEL", "WARN");
 
 		if ($segment["sensCourbe"] !== "ALIGNEMENT") {
 			$varDir = rad2deg($segment["longueur"] / $segment["rayonCourbe"]);
-			if ($segment["sensCourbe"] === "GAUCHE")
-				$angleFin = $angle + $varDir;
-			else
-				$angleFin = $angle - $varDir;
+			$angleFin = $angle + $varDir * $S;
 		} else {
 			$angleFin = $angle;
 		}
