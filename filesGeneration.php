@@ -162,7 +162,7 @@ define("LOGGING_LEVEL", "WARN");
 			$segmentId = generateID();
 
 			if ($sensCourbe !== "ALIGNEMENT") {
-				$varDir = 360 * $longueur / (2 * pi() * $rayonCourbe);
+				$varDir = rad2deg($segment["longueur"] / $segment["rayonCourbe"]);
 				$segmentPrecedent["angle"] = $angle + ($sensCourbe === "GAUCHE" ? 1 : -1) * $varDir;
 				if ($sensCourbe === "GAUCHE") {
 					$segmentPrecedent["X"] = $segDepX + (-cos(deg2rad($angle - 90)) + cos(deg2rad($segmentPrecedent["angle"] - 90))) * $rayonCourbe;
@@ -173,8 +173,8 @@ define("LOGGING_LEVEL", "WARN");
 				}
 			} else {
 				$segmentPrecedent["angle"] = $angle;
-				$segmentPrecedent["X"] = $segDepX + cos($angle) * $longueur;
-				$segmentPrecedent["Z"] = $segDepZ + sin($angle) * $longueur;
+				$segmentPrecedent["X"] = $segDepX + cos(deg2rad($angle)) * $longueur;
+				$segmentPrecedent["Z"] = $segDepZ + sin(deg2rad($angle)) * $longueur;
 			}
 
 			$coupes[] = ["id" => $segmentId, "rubanId" => $segment["rubanId"], "rubanGUIDs" => $segment["rubanGUIDs"], "sensCourbe" => $sensCourbe, "rayonCourbe" => $rayonCourbe, 
@@ -328,10 +328,10 @@ define("LOGGING_LEVEL", "WARN");
 		$segmentPrecedent["GUIDs"] = null;
 
 		if ($segment["sensCourbe"] === "ALIGNEMENT") {
-			$angletp = 0;
+			$angle = 0;
 
 			if ($segment["longueur"] > 0)
-				$angletp = (180 / pi()) * acos(($segment["segFinX"] - $segment["segDepX"]) / $segment["longueur"]);
+				$angle = rad2deg(acos(($segment["segFinX"] - $segment["segDepX"]) / $segment["longueur"]));
 			else
 				logger("Division par 0 (longueur)", "ERROR", $segment);
 
@@ -340,7 +340,7 @@ define("LOGGING_LEVEL", "WARN");
 
 			$deltaAngle = 0;
 			if ($segment["rayonCourbe"] > 0)
-				$deltaAngle = 360 * $segment["longueur"] / (2 * pi() * $segment["rayonCourbe"]);
+				$deltaAngle = rad2deg($segment["longueur"] / $segment["rayonCourbe"]);
 			else 
 				logger("Division par 0 (rayonCourbe)", "ERROR", $segment);
 
@@ -361,32 +361,31 @@ define("LOGGING_LEVEL", "WARN");
 				$T = -1;
 
 			if ($zF->abs() > 0)
-				$angletp = ($segtpZ >= 0 ? 1 : -1) * acos($segtpX / $zF->abs());
+				$angleTemp = ($segtpZ >= 0 ? 1 : -1) * acos($segtpX / $zF->abs());
 			else
 				logger("Division par 0 (module(z(F))", "ERROR", $segment);
 
-			$exp_term = new Complex(cos($angletp), sin($angletp));
+			$exp_term = new Complex(cos($angleTemp), sin($angleTemp));
 			$i_complex = new Complex(0, 1);
 			$exp_term_i = $exp_term->multiply($i_complex);
 			$zC = $zU->add($W->multiply($exp_term_i)->multiply($S)->multiply($T));
 
 			$centreX = $zC->r;
 			$centreZ = $zC->i;
-			$angletp = ($centreZ >= 0 ? 1 : -1) * acos($centreX / $zC->abs());
+			$angleTemp = ($centreZ >= 0 ? 1 : -1) * acos($centreX / $zC->abs());
 			$zA = $exp_term_i->multiply($S);
 			$aX = $zA->r;
 			$aZ = $zA->i;
-			$angletp = ($aZ >= 0 ? 1 : -1) * acos($aX / $zA->abs());
+			$angle = rad2deg(($aZ >= 0 ? 1 : -1) * acos($aX / $zA->abs()));
 		}
 
 		if ($key > 0 && $segment["nomLigne"] === $segmentPrecedent["nomLigne"] && $segment["numVoie"] === $segmentPrecedent["numVoie"]) { /* Ignorer si premier segment */
 			if ($segmentPrecedent["pkf"] !== $segment["pkd"])
 				logger("Discontinuité : segment n°{$key}, segDepX = {$segment["segDepX"]}, segDepZ = {$segment["segDepZ"]}");
-			elseif (abs($angletp - $segmentPrecedent["angle"]) >= 0.00001 && abs($angletp - $segmentPrecedent["angle"]) <= 0.5)
+			elseif (abs($angleTemp - $segmentPrecedent["angle"]) >= 0.00001 && abs($angleTemp - $segmentPrecedent["angle"]) <= 0.5)
 				logger("Rupture angle : segment n°{$key}, segDepX = {$segment["segDepX"]}, segDepZ = {$segment["segDepZ"]}");
 		}
 
-		$angle = $angletp;
 		// if (is_nan($angle))
 		// 	logger("⚠ Angle à une valeur NaN. segment #".$key, "ERROR", $segment);
 
@@ -397,7 +396,7 @@ define("LOGGING_LEVEL", "WARN");
 		$segment["segDepZRel"] = $segment["segDepZ"] - 1024 * $tileZ;
 
 		if ($segment["rayonCourbe"] > 0) {
-			$varDir = 360 * $segment["longueur"] / (2 * pi() * $segment["rayonCourbe"]);
+			$varDir =  rad2deg($segment["longueur"] / $segment["rayonCourbe"]);
 			if ($segment["sensCourbe"] === "GAUCHE")
 				$angleFin = $angle + $varDir;
 			else
