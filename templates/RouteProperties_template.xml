@@ -28,11 +28,11 @@
 		<iBlueprintLibrary-cAbsoluteBlueprintID>
 			<BlueprintSetID>
 				<iBlueprintLibrary-cBlueprintSetID>
-					<Provider d:type="cDeltaString">Kuju</Provider>
-					<Product d:type="cDeltaString">RailSimulator</Product>
+					<Provider d:type="cDeltaString">DTG</Provider>
+					<Product d:type="cDeltaString">Academy</Product>
 				</iBlueprintLibrary-cBlueprintSetID>
 			</BlueprintSetID>
-			<BlueprintID d:type="cDeltaString">TemplateRoutes\Default.xml</BlueprintID>
+			<BlueprintID d:type="cDeltaString">TemplateRoutes\TSA_RouteTemplate.xml</BlueprintID>
 		</iBlueprintLibrary-cAbsoluteBlueprintID>
 	</BlueprintID>
 	<Skies>
@@ -41,44 +41,44 @@
 				<iBlueprintLibrary-cAbsoluteBlueprintID>
 					<BlueprintSetID>
 						<iBlueprintLibrary-cBlueprintSetID>
-							<Provider d:type="cDeltaString">Kuju</Provider>
-							<Product d:type="cDeltaString">RailSimulatorCore</Product>
+							<Provider d:type="cDeltaString">DTG</Provider>
+							<Product d:type="cDeltaString">Academy</Product>
 						</iBlueprintLibrary-cBlueprintSetID>
 					</BlueprintSetID>
-					<BlueprintID d:type="cDeltaString">TimeOfDay\Core_Spring.xml</BlueprintID>
+					<BlueprintID d:type="cDeltaString">TimeOfDay\Spring.xml</BlueprintID>
 				</iBlueprintLibrary-cAbsoluteBlueprintID>
 			</SpringSkyBlueprint>
 			<SummerSkyBlueprint>
 				<iBlueprintLibrary-cAbsoluteBlueprintID>
 					<BlueprintSetID>
 						<iBlueprintLibrary-cBlueprintSetID>
-							<Provider d:type="cDeltaString">Kuju</Provider>
-							<Product d:type="cDeltaString">RailSimulatorCore</Product>
+							<Provider d:type="cDeltaString">DTG</Provider>
+							<Product d:type="cDeltaString">Academy</Product>
 						</iBlueprintLibrary-cBlueprintSetID>
 					</BlueprintSetID>
-					<BlueprintID d:type="cDeltaString">TimeOfDay\Core_Summer.xml</BlueprintID>
+					<BlueprintID d:type="cDeltaString">TimeOfDay\Summer.xml</BlueprintID>
 				</iBlueprintLibrary-cAbsoluteBlueprintID>
 			</SummerSkyBlueprint>
 			<AutumnSkyBlueprint>
 				<iBlueprintLibrary-cAbsoluteBlueprintID>
 					<BlueprintSetID>
 						<iBlueprintLibrary-cBlueprintSetID>
-							<Provider d:type="cDeltaString">Kuju</Provider>
-							<Product d:type="cDeltaString">RailSimulatorCore</Product>
+							<Provider d:type="cDeltaString">DTG</Provider>
+							<Product d:type="cDeltaString">Academy</Product>
 						</iBlueprintLibrary-cBlueprintSetID>
 					</BlueprintSetID>
-					<BlueprintID d:type="cDeltaString">TimeOfDay\Core_Autumn.xml</BlueprintID>
+					<BlueprintID d:type="cDeltaString">TimeOfDay\Autumn.xml</BlueprintID>
 				</iBlueprintLibrary-cAbsoluteBlueprintID>
 			</AutumnSkyBlueprint>
 			<WinterSkyBlueprint>
 				<iBlueprintLibrary-cAbsoluteBlueprintID>
 					<BlueprintSetID>
 						<iBlueprintLibrary-cBlueprintSetID>
-							<Provider d:type="cDeltaString">Kuju</Provider>
-							<Product d:type="cDeltaString">RailSimulatorCore</Product>
+							<Provider d:type="cDeltaString">DTG</Provider>
+							<Product d:type="cDeltaString">Academy</Product>
 						</iBlueprintLibrary-cBlueprintSetID>
 					</BlueprintSetID>
-					<BlueprintID d:type="cDeltaString">TimeOfDay\Core_Winter.xml</BlueprintID>
+					<BlueprintID d:type="cDeltaString">TimeOfDay\Winter.xml</BlueprintID>
 				</iBlueprintLibrary-cAbsoluteBlueprintID>
 			</WinterSkyBlueprint>
 		</cRouteBlueprint-sSkies>
@@ -87,33 +87,33 @@
 		<iBlueprintLibrary-cAbsoluteBlueprintID>
 			<BlueprintSetID>
 				<iBlueprintLibrary-cBlueprintSetID>
-					<Provider d:type="cDeltaString">Kuju</Provider>
-					<Product d:type="cDeltaString">RailSimulatorCore</Product>
+					<Provider d:type="cDeltaString">DTG</Provider>
+					<Product d:type="cDeltaString">Academy</Product>
 				</iBlueprintLibrary-cBlueprintSetID>
 			</BlueprintSetID>
-			<BlueprintID d:type="cDeltaString">Weather\Default.xml</BlueprintID>
+			<BlueprintID d:type="cDeltaString">Weather\Cloudy.xml</BlueprintID>
 		</iBlueprintLibrary-cAbsoluteBlueprintID>
 	</WeatherBlueprint>
 	<TerrainBlueprint>
 		<iBlueprintLibrary-cAbsoluteBlueprintID>
 			<BlueprintSetID>
 				<iBlueprintLibrary-cBlueprintSetID>
-					<Provider d:type="cDeltaString">Kuju</Provider>
-					<Product d:type="cDeltaString">RailSimulator</Product>
+					<Provider d:type="cDeltaString">DTG</Provider>
+					<Product d:type="cDeltaString">Academy</Product>
 				</iBlueprintLibrary-cBlueprintSetID>
 			</BlueprintSetID>
-			<BlueprintID d:type="cDeltaString">Environment\Terrain\Texturing.xml</BlueprintID>
+			<BlueprintID d:type="cDeltaString">Environment\Terrain\Terrain.xml</BlueprintID>
 		</iBlueprintLibrary-cAbsoluteBlueprintID>
 	</TerrainBlueprint>
 	<MapBlueprint>
 		<iBlueprintLibrary-cAbsoluteBlueprintID>
 			<BlueprintSetID>
 				<iBlueprintLibrary-cBlueprintSetID>
-					<Provider d:type="cDeltaString"></Provider>
-					<Product d:type="cDeltaString"></Product>
+					<Provider d:type="cDeltaString">DTG</Provider>
+					<Product d:type="cDeltaString">Academy</Product>
 				</iBlueprintLibrary-cBlueprintSetID>
 			</BlueprintSetID>
-			<BlueprintID d:type="cDeltaString"></BlueprintID>
+			<BlueprintID d:type="cDeltaString">System\Map\map.xml</BlueprintID>
 		</iBlueprintLibrary-cAbsoluteBlueprintID>
 	</MapBlueprint>
 	<LockCounter d:type="sUInt32">1</LockCounter>
@@ -142,20 +142,8 @@
 	</MapProjection>
 	<RBlueprintSetPreLoad>
 		<iBlueprintLibrary-cBlueprintSetID d:id="33885126">
-			<Provider d:type="cDeltaString">Kuju</Provider>
-			<Product d:type="cDeltaString">RailSimulator</Product>
-		</iBlueprintLibrary-cBlueprintSetID>
-		<iBlueprintLibrary-cBlueprintSetID d:id="33885128">
-			<Provider d:type="cDeltaString">Kuju</Provider>
-			<Product d:type="cDeltaString">RailSimulatorCore</Product>
-		</iBlueprintLibrary-cBlueprintSetID>
-		<iBlueprintLibrary-cBlueprintSetID d:id="33885130">
-			<Provider d:type="cDeltaString"></Provider>
-			<Product d:type="cDeltaString"></Product>
-		</iBlueprintLibrary-cBlueprintSetID>
-		<iBlueprintLibrary-cBlueprintSetID d:id="33885132">
-			<Provider d:type="cDeltaString">Kuju</Provider>
-			<Product d:type="cDeltaString">RailsimulatorUS</Product>
+			<Provider d:type="cDeltaString">DTG</Provider>
+			<Product d:type="cDeltaString">Academy</Product>
 		</iBlueprintLibrary-cBlueprintSetID>
 	</RBlueprintSetPreLoad>
 	<AuthoredLanguage d:type="cDeltaString">fr</AuthoredLanguage>

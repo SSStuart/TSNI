@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cRecordSet xmlns:d="http://www.kuju.com/TnT/2003/Delta" d:version="1.0" d:id="199752954">
+	<Record>
+		<Network-cTrackNetwork d:id="{{ trackNetwork.id }}">
+			<NetworkID>
+				<cGUID>
+					<UUID>
+						<e d:type="sUInt64">{{ trackNetwork.GUIDs[0] }}</e>
+						<e d:type="sUInt64">{{ trackNetwork.GUIDs[1] }}</e>
+					</UUID>
+					<DevString d:type="cDeltaString">{{ trackNetwork.GUIDs[2] }}</DevString>
+				</cGUID>
+			</NetworkID>
+			<RibbonContainer>
+				<Network-cRibbonContainerUnstreamed d:id="123456789">
+					<Ribbon>
+					{% for ruban in trackNetwork.rubans %}
+						<Network-cTrackRibbon d:id="{{ ruban.id }}">
+							<_length d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ ruban.longueur }}</_length>
+							<RibbonID>
+								<cGUID>
+									<UUID>
+										<e d:type="sUInt64">{{ ruban.GUIDs[0] }}</e>
+										<e d:type="sUInt64">{{ ruban.GUIDs[1] }}</e>
+									</UUID>
+									<DevString d:type="cDeltaString">{{ ruban.GUIDs[2] }}</DevString>
+								</cGUID>
+							</RibbonID>
+							<Height>
+							{% for height in ruban.heights %}
+								<Network-iRibbon-cHeight d:id="171895090">
+									<_position d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ height.start }}</_position>
+									<_height d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ height.height }}</_height>
+									<_manual d:type="bool">1</_manual>
+								</Network-iRibbon-cHeight>
+								<Network-iRibbon-cHeight d:id="171895091">
+									<_position d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ height.end }}</_position>
+									<_height d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ height.height }}</_height>
+									<_manual d:type="bool">1</_manual>
+								</Network-iRibbon-cHeight>
+							{% endfor %}
+							</Height>
+							<RouteVector>
+								<cRouteVector2>
+									<X>
+										<cRouteCoordinate>
+											<Distance d:type="sInt32">{{ ruban.tileX }}</Distance>
+										</cRouteCoordinate>
+									</X>
+									<Z>
+										<cRouteCoordinate>
+											<Distance d:type="sInt32">{{ ruban.tileZ }}</Distance>
+										</cRouteCoordinate>
+									</Z>
+								</cRouteVector2>
+							</RouteVector>
+							<RBottomLeft d:numElements="2" d:elementType="sFloat32" d:precision="string">{{ ruban.coordRelX ~ ' ' ~ ruban.coordRelZ }}</RBottomLeft>
+							<RExtents d:numElements="2" d:elementType="sFloat32" d:precision="string">{{ ruban.extentX ~ ' ' ~ ruban.extentZ }}</RExtents>
+							<FixedPatternRef>
+								<Network-cNetworkRibbon-sFixedPatternRef>
+									<FixedPattern>
+										<d:nil />
+									</FixedPattern>
+									<FixedPatternRibbonIndex d:type="sInt32">-1</FixedPatternRibbonIndex>
+								</Network-cNetworkRibbon-sFixedPatternRef>
+							</FixedPatternRef>
+							<LockCounterWhenModified d:type="sUInt32">1</LockCounterWhenModified>
+							<Properties>
+								<Network-cPropertyContainer d:id="199665850">
+									<Property>
+										<Network-cTrackNetworkElectrification d:id="140786068">
+											<_start d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">0</_start>
+											<_end d:type="sFloat32" d:alt_encoding="0000000000408F40" d:precision="string">{{ ruban.longueur }}</_end>
+											<ScenarioOwned d:type="bool">0</ScenarioOwned>
+											<Property>
+												<Network-iTrackNetworkElectrification-cPropertyValue>
+													<Electrification d:type="cDeltaString">{{ ruban.electrification.electrification }}</Electrification>
+												</Network-iTrackNetworkElectrification-cPropertyValue>
+											</Property>
+										</Network-cTrackNetworkElectrification>
+										<Network-cTrackNetworkTrackRule d:id="200376046">
+											<_start d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">0</_start>
+											<_end d:type="sFloat32"	d:alt_encoding="0000000000000000" d:precision="string">{{ ruban.longueur }}</_end>
+											<ScenarioOwned d:type="bool">0</ScenarioOwned>
+											<Property>
+												<Network-iTrackNetworkTrackRule-cPropertyValue>
+													<TrackRule>
+														<iBlueprintLibrary-cAbsoluteBlueprintID>
+															<BlueprintSetID>
+																<iBlueprintLibrary-cBlueprintSetID>
+																	<Provider d:type="cDeltaString">{{ ruban.regleVoie.provider }}</Provider>
+																	<Product d:type="cDeltaString">{{ ruban.regleVoie.product }}</Product>
+																</iBlueprintLibrary-cBlueprintSetID>
+															</BlueprintSetID>
+															<BlueprintID d:type="cDeltaString">{{ ruban.regleVoie.blueprint }}</BlueprintID>
+														</iBlueprintLibrary-cAbsoluteBlueprintID>
+													</TrackRule>
+												</Network-iTrackNetworkTrackRule-cPropertyValue>
+											</Property>
+										</Network-cTrackNetworkTrackRule>
+										<Network-cSectionGenericProperties d:id="203545364">
+											<_start d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">0</_start>
+											<_end d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ ruban.longueur }}</_end>
+											<ScenarioOwned d:type="bool">0</ScenarioOwned>
+											<BlueprintID>
+												<iBlueprintLibrary-cAbsoluteBlueprintID>
+													<BlueprintSetID>
+														<iBlueprintLibrary-cBlueprintSetID>
+															<Provider d:type="cDeltaString">{{ ruban.typeVoie.provider }}</Provider>
+															<Product d:type="cDeltaString">{{ ruban.typeVoie.product }}</Product>
+														</iBlueprintLibrary-cBlueprintSetID>
+													</BlueprintSetID>
+													<BlueprintID d:type="cDeltaString">{{ ruban.typeVoie.blueprint }}</BlueprintID>
+												</iBlueprintLibrary-cAbsoluteBlueprintID>
+											</BlueprintID>
+											<SecondaryBlueprintID>
+												<iBlueprintLibrary-cAbsoluteBlueprintID>
+													<BlueprintSetID>
+														<iBlueprintLibrary-cBlueprintSetID>
+															<Provider d:type="cDeltaString"></Provider>
+															<Product d:type="cDeltaString"></Product>
+														</iBlueprintLibrary-cBlueprintSetID>
+													</BlueprintSetID>
+													<BlueprintID d:type="cDeltaString"></BlueprintID>
+												</iBlueprintLibrary-cAbsoluteBlueprintID>
+											</SecondaryBlueprintID>
+											<ElectrificationBlueprintID>
+												<iBlueprintLibrary-cAbsoluteBlueprintID>
+													<BlueprintSetID>
+														<iBlueprintLibrary-cBlueprintSetID>
+															<Provider d:type="cDeltaString"></Provider>
+															<Product d:type="cDeltaString"></Product>
+														</iBlueprintLibrary-cBlueprintSetID>
+													</BlueprintSetID>
+													<BlueprintID d:type="cDeltaString"></BlueprintID>
+												</iBlueprintLibrary-cAbsoluteBlueprintID>
+											</ElectrificationBlueprintID>
+											<LoftScaleFactor d:type="sFloat32" d:alt_encoding="000000000000F03F" d:precision="string">1</LoftScaleFactor>
+										</Network-cSectionGenericProperties>
+   										<Network-cTrackNetworkRideQuality d:id="135844478">
+											<_start d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ ruban.qualite.start }}</_start>
+											<_end d:type="sFloat32" d:alt_encoding="00000000A6A26240" d:precision="string">{{ ruban.qualite.end }}</_end>
+   										 	<ScenarioOwned d:type="bool">1</ScenarioOwned>
+   										 	<Property>
+												<Network-iTrackNetworkRideQuality-cPropertyValue>
+													<LineUnevenness d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ ruban.qualite.qualite }}</LineUnevenness>
+												</Network-iTrackNetworkRideQuality-cPropertyValue>
+   										 	</Property>
+										</Network-cTrackNetworkRideQuality>
+										<Network-cTrackNetworkSpeedLimit d:id="136282056">
+											<_start d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ ruban.vitesses.start }}</_start>
+											<_end d:type="sFloat32" d:alt_encoding="00000000A6A26240" d:precision="string">{{ ruban.vitesses.end }}</_end>
+											<ScenarioOwned d:type="bool">1</ScenarioOwned>
+											<Property>
+												<Network-iTrackNetworkSpeedLimit-cPropertyValue>
+													<Primary d:type="sInt32">{{ ruban.vitesses.primary }}</Primary>
+													<Secondary d:type="sInt32">{{ ruban.vitesses.secondary }}</Secondary>
+												</Network-iTrackNetworkSpeedLimit-cPropertyValue>
+   										 	</Property>
+   									 	</Network-cTrackNetworkSpeedLimit>
+									</Property>
+									<SimpleValuePropertyEditFlag d:type="sUInt32">2</SimpleValuePropertyEditFlag>
+								</Network-cPropertyContainer>
+							</Properties>
+							<ExplicitDirection>
+								<Network-cDirection>
+									<_dir d:type="cDeltaString">forwards</_dir>
+								</Network-cDirection>
+							</ExplicitDirection>
+							<Superelevated d:type="bool">0</Superelevated>
+						</Network-cTrackRibbon>
+					{% endfor %}
+					</Ribbon>
+					<Node>
+					{% for node in trackNetwork.nodes %}
+						<Network-cTrackNode d:id="{{ node.id }}">
+							<Connection>
+							{% for extremite in node.extremites %}
+								<Network-cNetworkNode-sRConnection>
+									<_id>
+										<cGUID>
+											<UUID>
+												<e d:type="sUInt64">{{ extremite.rubanGUIDs[0] }}</e>
+												<e d:type="sUInt64">{{ extremite.rubanGUIDs[1] }}</e>
+											</UUID>
+											<DevString d:type="cDeltaString">{{ extremite.rubanGUIDs[2] }}</DevString>
+										</cGUID>
+									</_id>
+									<_end>
+										<cNormFloat>
+											<Position d:type="sFloat32" d:alt_encoding="0000000000000000" d:precision="string">{{ extremite.extremPos }}</Position>
+										</cNormFloat>
+									</_end>
+								</Network-cNetworkNode-sRConnection>
+							{% endfor %}
+							</Connection>
+							<FixedPatternRef>
+								<Network-cNetworkNode-sFixedPatternRef>
+									<FixedPattern>
+										<d:nil />
+									</FixedPattern>
+									<FixedPatternNodeIndex d:type="sInt32">-1</FixedPatternNodeIndex>
+								</Network-cNetworkNode-sFixedPatternRef>
+							</FixedPatternRef>
+							<RouteVector>
+								<cRouteVector2>
+									<X>
+										<cRouteCoordinate>
+											<Distance d:type="sInt32">2147483647</Distance>
+										</cRouteCoordinate>
+									</X>
+									<Z>
+										<cRouteCoordinate>
+											<Distance d:type="sInt32">2147483647</Distance>
+										</cRouteCoordinate>
+									</Z>
+								</cRouteVector2>
+							</RouteVector>
+							<PatternRef>
+								<Network-cTrackNode-sPatternRef>
+									<Pattern>
+										<d:nil />
+									</Pattern>
+									<PatternNodeIndex d:type="sInt32">-1</PatternNodeIndex>
+								</Network-cTrackNode-sPatternRef>
+							</PatternRef>
+						</Network-cTrackNode>
+					{% endfor %}
+					</Node>
+				</Network-cRibbonContainerUnstreamed>
+			</RibbonContainer>
+			<AreaMarkers />
+		</Network-cTrackNetwork>
+	</Record>
+</cRecordSet>
