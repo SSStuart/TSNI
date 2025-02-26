@@ -128,6 +128,7 @@ define("LOGGING_LEVEL", "WARN");
 	function decoupeSegment($segment) {
 		// logger("Variable segment", "WARN", $segment);
 		global $segmentPrecedent;
+		global $S;
 		$longueur = $segment["longueur"];
 		$segDepX = $segment["segDepX"];
 		$segDepZ = $segment["segDepZ"];
@@ -163,14 +164,9 @@ define("LOGGING_LEVEL", "WARN");
 
 			if ($sensCourbe !== "ALIGNEMENT") {
 				$varDir = rad2deg($segment["longueur"] / $segment["rayonCourbe"]);
-				$segmentPrecedent["angle"] = $angle + ($sensCourbe === "GAUCHE" ? 1 : -1) * $varDir;
-				if ($sensCourbe === "GAUCHE") {
-					$segmentPrecedent["X"] = $segDepX + (-cos(deg2rad($angle - 90)) + cos(deg2rad($segmentPrecedent["angle"] - 90))) * $rayonCourbe;
-					$segmentPrecedent["Z"] = $segDepZ + (-sin(deg2rad($angle - 90)) + sin(deg2rad($segmentPrecedent["angle"] - 90))) * $rayonCourbe;
-				} else {
-					$segmentPrecedent["X"] = $segDepX + (-cos(deg2rad($angle + 90)) + cos(deg2rad($segmentPrecedent["angle"] + 90))) * $rayonCourbe;
-					$segmentPrecedent["Z"] = $segDepZ + (-sin(deg2rad($angle + 90)) + sin(deg2rad($segmentPrecedent["angle"] + 90))) * $rayonCourbe;
-				}
+				$segmentPrecedent["angle"] = $angle + $varDir + $S;
+				$segmentPrecedent["X"] = $segDepX + (-cos(deg2rad($angle - 90 * $S)) + cos(deg2rad($segmentPrecedent["angle"] - 90 * $S))) * $rayonCourbe;
+				$segmentPrecedent["Z"] = $segDepZ + (-sin(deg2rad($angle - 90 * $S)) + sin(deg2rad($segmentPrecedent["angle"] - 90 * $S))) * $rayonCourbe;
 			} else {
 				$segmentPrecedent["angle"] = $angle;
 				$segmentPrecedent["X"] = $segDepX + cos(deg2rad($angle)) * $longueur;
@@ -486,8 +482,8 @@ define("LOGGING_LEVEL", "WARN");
 				"tileZ" => $segment["tileZ"], 
 				"coordRelZ" => $segment["segDepZRel"], 
 				"angle" => [
-					"cos" => cos($segment["angle"]),
-					"sin" => sin($segment["angle"]),
+					"cos" => cos(deg2rad($segment["angle"])),
+					"sin" => sin(deg2rad($segment["angle"])),
 				],
 			];
 		}
