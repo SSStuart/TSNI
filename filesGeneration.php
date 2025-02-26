@@ -395,8 +395,8 @@ define("LOGGING_LEVEL", "WARN");
 		$segment["segDepXRel"] = $segment["segDepX"] - 1024 * $tileX;
 		$segment["segDepZRel"] = $segment["segDepZ"] - 1024 * $tileZ;
 
-		if ($segment["rayonCourbe"] > 0) {
-			$varDir =  rad2deg($segment["longueur"] / $segment["rayonCourbe"]);
+		if ($segment["sensCourbe"] !== "ALIGNEMENT") {
+			$varDir = rad2deg($segment["longueur"] / $segment["rayonCourbe"]);
 			if ($segment["sensCourbe"] === "GAUCHE")
 				$angleFin = $angle + $varDir;
 			else
