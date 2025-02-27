@@ -287,20 +287,34 @@ define("LOGGING_LEVEL", "WARN");
 	$result = $conn->execute_query($sqlRequest);
 	if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
+			// Traitement des données (le + complexe)
+			$rayonCourbeSegment = ($row["sens"] !== "ALIGNEMENT" ? intval($row["rayon"]) : -1);
+			$coordUTMDepartSegment = convertGeodeticToUTM(floatval($row["Xd"]), floatval($row["Zd"]));
+			$coordUTMFinSegment = convertGeodeticToUTM(floatval($row["Xf"]), floatval($row["Zf"]));
+			$segDepXRel = $coordUTMDepartSegment["X"] - $routePropreties["mapOffset"]["X"];
+			$segDepZRel = $coordUTMDepartSegment["Z"] - $routePropreties["mapOffset"]["Z"];
+			$segFinXRel = $coordUTMFinSegment["X"] - $routePropreties["mapOffset"]["X"];
+			$segFinZRel = $coordUTMFinSegment["Z"] - $routePropreties["mapOffset"]["Z"];
+			if ($row["sens"] === "ALIGNEMENT")
+				$longueurSegment = sqrt(abs($row["Xf_L93"] - $row["Xd_L93"]) ** 2 + abs($row["Zf_L93"] - $row["Zd_L93"]) ** 2);
+			else
+				$longueurSegment = abs(pkProcessing($row["pkf"]) - pkProcessing($row["pkd"]));
+
+			
 			$segmentsBDD[] = [
 				"GUIDs" => generateGUID(),
 				"numVoie" => $row["nomVoie"], 
 				"codeLigne" => $row["codeLigne"], 
 				"nomLigne" => $row["nomLigne"], 
 				"sensCourbe" => $row["sens"], 
-				"rayonCourbe" => ($row["sens"] !== "ALIGNEMENT" ? intval($row["rayon"]) : -1), 
+				"rayonCourbe" => $rayonCourbeSegment, 
 				"pkd" => pkProcessing($row["pkd"]), 
 				"pkf" => pkProcessing($row["pkf"]), 
-				"segDepX" => convertGeodeticToUTM(floatval($row["Xd"]), floatval($row["Zd"]))["X"] - $routePropreties["mapOffset"]["X"], 
-				"segDepZ" => convertGeodeticToUTM(floatval($row["Xd"]), floatval($row["Zd"]))["Z"] - $routePropreties["mapOffset"]["Z"], 
-				"segFinX" => convertGeodeticToUTM(floatval($row["Xf"]), floatval($row["Zf"]))["X"] - $routePropreties["mapOffset"]["X"], 
-				"segFinZ" => convertGeodeticToUTM(floatval($row["Xf"]), floatval($row["Zf"]))["Z"] - $routePropreties["mapOffset"]["Z"], 
-				"longueur" => ($row["sens"] === "ALIGNEMENT" ? (sqrt(abs($row["Xf_L93"] - $row["Xd_L93"]) ** 2 + abs($row["Zf_L93"] - $row["Zd_L93"]) ** 2)) : abs(pkProcessing($row["pkf"]) - pkProcessing($row["pkd"]))),
+				"segDepX" => $segDepXRel, 
+				"segDepZ" => $segDepZRel, 
+				"segFinX" => $segFinXRel, 
+				"segFinZ" => $segFinZRel, 
+				"longueur" => $longueurSegment,
 			];
 		}
 	}
