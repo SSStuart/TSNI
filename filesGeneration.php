@@ -1,14 +1,16 @@
 <?php
+define("VENDOR_PATH", "./");
+define("WEBSITE_PATH", "./");
 require_once('./globalVar.inc.php');
-require_once '/home/crtpxwuz/vendor/autoload.php';
+require_once VENDOR_PATH.'vendor/autoload.php';
 
 // header("Content-type: application/json;");
 
 use MathPHP\Number\Complex;
 
-$loader = new \Twig\Loader\FilesystemLoader('/home/crtpxwuz/public_html/TSNI/templates');
+$loader = new \Twig\Loader\FilesystemLoader(WEBSITE_PATH.'templates');
 $twig = new \Twig\Environment($loader, [
-    'cache' => '/home/crtpxwuz/vendor/twig/compilation_cache',
+    'cache' => VENDOR_PATH.'vendor/twig/compilation_cache',
 ]);
 
 define("LOGGING_LEVEL", "WARN");

@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="favicon.png" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="styles.css?v=0.1">
+	<meta name="author" content="SSStuart">
+	<meta name="description" content="Importez une lignes réelle dans Train Simulator">
+	<title>[V2] TS Network Importer</title>
+
+	<meta property="og:title" content="TS Network Importer">
+	<meta property="og:url" content="">
+	<meta property="og:description" content="Importez une lignes réelle dans Train Simulator">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="http://ssstuart.net/TSNI/embedThumb.png">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="TS Network Importer">
+	<meta name="theme-color" content="">
+</head>
+
+<body>
+	<header>
+
+	</header>
+	<main>
+		<h2>Qu'est-ce que c'est ?</h2>
+		<p>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, magni! Culpa enim reiciendis est doloribus. Facilis tenetur libero dicta cum aut doloribus ea facere molestias maxime, fuga repellendus sed labore!
+			Perspiciatis eaque incidunt molestias natus iste delectus deleniti nesciunt labore beatae perferendis quaerat, possimus hic ducimus voluptatum ut commodi eius ab ipsam asperiores porro? Repellat ad saepe cumque hic est.
+			Unde consequatur est reiciendis dignissimos, atque neque quidem veniam harum, illo vero soluta quo deleniti quos quam dolores veritatis sapiente sit accusamus obcaecati numquam. Expedita sapiente placeat odio natus quia?
+			Iusto, dignissimos possimus. Sint amet et libero, eum, excepturi in quaerat quia molestiae sapiente consectetur voluptas reprehenderit error dolorem odit est quam repellat quisquam blanditiis ut voluptatum, dicta dolor similique.
+			Perspiciatis provident eos numquam unde quas ad labore delectus blanditiis. Voluptates soluta atque hic harum itaque aperiam, odio quos eligendi eveniet aliquam accusamus quod impedit, explicabo fuga quae officiis assumenda.
+		</p>
+		<h2>Comment l'utiliser ?</h2>
+		<p>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur natus id esse corrupti laborum voluptatum consequatur. Rem harum ratione veritatis enim quos aliquam saepe accusamus officiis, dicta mollitia tempora cumque?
+			Eveniet vero at assumenda molestias. Reprehenderit nesciunt cumque sequi nobis! Voluptate dolores sit dolor aliquid suscipit voluptatibus consectetur dolore explicabo autem, numquam, enim nesciunt debitis similique saepe nihil dolorum veritatis!
+			Voluptates officia ratione laudantium sunt accusamus harum. Repellat exercitationem laborum porro rem qui labore voluptates vitae deserunt sed nemo amet, reiciendis eaque fuga explicabo obcaecati voluptatem laudantium, nostrum totam iste.
+			Incidunt hic amet voluptatum optio nulla velit nihil est! Voluptate asperiores impedit consequatur voluptatibus esse fugiat mollitia dolorem quas quisquam ea. Aliquid, doloribus voluptatibus quam dolores ducimus possimus amet ut?
+			Sequi voluptate architecto repellat voluptas enim iusto voluptatibus ipsum commodi vel esse. Voluptas exercitationem eum, praesentium minima nulla cupiditate assumenda accusamus voluptatibus, a molestiae debitis provident beatae tempore laboriosam esse?
+		</p>
+
+		<h2>Formulaire</h2>
+		<form action="./">
+			<div class="inputGroup" id="modelSelection">
+				<label for="editionsTexture">Sélectionnez l'édition que vous avez acheté :</label>
+				<div class="inputCont">
+					<input type="text" list="listEditions" name="editionsTexture" id="editionsTexture" onchange="changeEdition('texture')" placeholder="TS20XX">
+				</div><span class="inputInfo">(utilisé pour les valeurs par défaut)</span>
+				<datalist id="listEditions">
+					<option value="TS2013">TS2013 : London to Brighton, Isle Of Wight, East Coast Main Line, Great Western Mainline</option>
+					<option value="TS2014">TS2014 : Hamburg Hanover, London-Faversham High Speed, Donner Pass: Southern Pacific</option>
+					<option value="TS2015">TS2015 : East Coast Main Line London – Peterborough, NEC: New York - New Haven, Munich - Garmisch-Partenkirchen</option>
+					<option value="TS2016">TS2016 : Riviera Line: Exeter to Kingswear, West Rhine: Cologne - Koblenz, Sherman Hill</option>
+					<option value="TS2017">TS2017 : North Jersey Coast Line, Hamburg Lubeck, LGV: Marseille - Avignon, South Wales Coastal</option>
+					<option value="TS2018">TS2018 : Mittenwaldbahn: Garmisch-Partenkirchen - Innsbruck, Peninsula Corridor: San Francisco – San Jose, North Wales Coastal</option>
+					<option value="TS2019">TS2019 : Portsmouth Direct Line: London Waterloo - Portsmouth, Soldier Summit, Salt Lake City, Frankfurt High Speed: Frankfurt – Karlsruhe Route, The Rhine Railway: Mannheim - Karlsruhe</option>
+					<option value="TS2020">TS2020 : Nuremberg &amp; Regensburg Bahn, South Western Main Line: Southampton - Bournemouth, Norfolk Southern N-Line</option>
+					<option value="TS2021">TS2021 : Norddeutsche-Bahn: Kiel - Lübeck, Clinchfield Railroad: Elkhorn City - St. Paul, Fife Circle Line: Edinburgh - Dunfermline</option>
+					<option value="TS2022">TS2022 : Northeast Corridor: Washington DC - Baltimore, Frankfurt - Koblenz, Birmingham Cross City Line: Lichfield - Bromsgrove &amp; Redditch</option>
+				</datalist>
+			</div>
+
+			
+
+			<div class="formSummaryCont">
+				<div class="summarySection">
+					<span id="summStepOne">Etape 1</span>
+				</div>
+				<div class="summarySection">
+					<span id="summStepTwo">Etape 2</span>
+				</div>
+				<div class="summarySection">
+					<span id="summStepThree">Etape 3</span>
+				</div>
+			</div>
+
+			<div id="stepsCont">
+
+				<!-- ========== STEP 1 ========== -->
+				<div class="formStep current">
+					<h3>1. Propriétés itinéraire <span class="stepCompletion" data-completion="">...</span></h3>
+					<div class="inputGroup" data-inputRequired="true">
+						<label for="routeName"> Nom de l'itinéraire :</label>
+						<div class="inputCont"><input type="text" id="routeName" name="routeName" size="25" required="" oninput="validationFn()"></div>
+					</div>
+					<fieldset>
+						<legend><h4>Point de départ de l'itinéraire</h4></legend>
+						<span>Cette position correspond à l'endroit d'apparition dans l'éditeur. Choisissez de préférence une position proche du réseau sélectionné.</span>
+						<div class="inputGroup" data-inputRequired="true">
+							<label for="latStart">Latitude départ :</label>
+							<div class="inputCont">
+								<input type="number" min="41.5" max="52" step="0.010000" id="latStart" name="latStart" oninput="actualiseZoneValues();validationFn()" required="">°
+							</div>
+							<span class="inputInfo">41,5 ↔ 52. Coordonnées de la gare de départ de l'itinéraire par ex.</span>
+						</div>
+						<div class="inputGroup" data-inputRequired="true">
+							<label for="lonStart">Longitude départ :</label>
+							<div class="inputCont">
+								<input type="number" min="-5.5" max="8.5" step="0.010000" id="lonStart" name="lonStart" oninput="actualiseZoneValues();validationFn()" required="">°
+							</div>
+							<span class="inputInfo">-5,5 ↔ 8,5. Coordonnées de la gare de départ de l'itinéraire par ex.</span>
+						</div>
+					</fieldset>
+					<div class="inputGroup">
+						<label for="routeTemplate"> Modèle texture :</label>
+						<div class="inputCont"><input type="text" id="routeTemplate" name="routeTemplate" size="25"></div>
+						<span class="inputInfo">Laissez vide pour le <a href="#modelSelection" class="linkToModelSelection">modèle</a> par défaut</span>
+					</div>
+				</div>
+
+
+				<!-- ========== STEP 2 ========== -->
+				<div class="formStep">
+					<h3>2. Sélection des voies <span class="stepCompletion" data-completion="">...</span></h3>
+					<p>
+						Pour sélectionner les voies à importer, vous pouvez sélectionner une zone sur la carte pour sélectionner les segments des lignes qui s'y trouve. Si vous ne faites pas de sélection par zone, utilisez le champ dessous pour sélectionner des lignes entières avec leurs noms (vous pouvez aussi utiliser ce champ pour ajouter une ligne en supplément de la zone sélectionné).<br>
+						La liste des lignes sélectionnées est visible en bas, vous pouvez supprimer les lignes qui ne vous intéressent pas (dans la zone, par exemple).
+					</p>
+						
+					<div id="selectionStepContentZone">
+						<div id="zoneInputArea">
+							<h4 id="zonePoint1Title">⇱ Point 1</h4><span class="inputInfo">Doit se situer en haut à gauche de la zone</span>
+							<div class="inputGroup">
+								<label for="latTop">Lat. </label>
+								<div class="inputCont">
+									<!-- type="text" instead of "number" ? If input type="number" contains space > input is invalid > can't access its value -->
+									<input type="text" id="latTop" name="latTop" value="48.900000" size="10" pattern="((-?)\d+(,|\.)\d+)|((-?)\d+)" title="Un nombre décimal compris entre 41,5 et 52 (inclus) (Précision : 6 chiffres max.)" placeholder="Latitude" oninput="resetLines();actualiseZoneValues();validationFn()" required="">°
+								</div><span class="inputInfo">41,5 ↔ 52</span><br>
+								<label for="lonLeft">Long. </label>
+								<div class="inputCont">
+									<!-- type="text" instead of "number" ? If input type="number" contains space > input is invalid > can't access its value -->
+									<input type="text" id="lonLeft" name="lonLeft" value="2.150000" size="10" pattern="((-?)\d+(,|\.)\d+)|((-?)\d+)" title="Un nombre décimal compris entre -5,5 et 8,5 (inclus) (Précision : 6 chiffres max.)" placeholder="Longitude" oninput="resetLines();actualiseZoneValues();validationFn()" required="">°
+								</div><span class="inputInfo">-5,5 ↔ 8,5</span>
+							</div>
+							<button type="button" class="locationPicker" id="locPickPoint1">Sélectionner sur la carte</button>
+							<h4 id="zonePoint2Title">⇲ Point 2</h4><span class="inputInfo">Doit se situer en bas à droite de la zone</span>
+							<div class="inputGroup">
+								<label for="latBottom">Lat. </label>
+								<div class="inputCont">
+									<!-- type="text" instead of "number" ? If input type="number" contains space > input is invalid > can't access its value -->
+									<input type="text" id="latBottom" name="latBottom" value="48.700000" size="10" pattern="((-?)\d+(,|\.)\d+)|((-?)\d+)" title="Un nombre décimal compris entre 41,5 et 52 (inclus) (Précision : 6 chiffres max.)" placeholder="Latitude" oninput="resetLines();actualiseZoneValues();validationFn()" required="">°
+								</div><span class="inputInfo">41,5 ↔ 52</span><br>
+								<label for="lonRight">Long. </label>
+								<div class="inputCont">
+									<!-- type="text" instead of "number" ? If input type="number" contains space > input is invalid > can't access its value -->
+									<input type="text" id="lonRight" name="lonRight" value="2.450000" size="10" pattern="((-?)\d+(,|\.)\d+)|((-?)\d+)" title="Un nombre décimal compris entre -5,5 et 8,5 (inclus) (Précision : 6 chiffres max.)" placeholder="Longitude" oninput="resetLines();actualiseZoneValues();validationFn()" required="">°
+								</div><span class="inputInfo">-5,5 ↔ 8,5</span>
+							</div>
+							<button type="button" class="locationPicker" id="locPickPoint2">Sélectionner sur la carte</button>
+						</div>
+						<div id="zonePreviewArea">
+							<div id="mapFrance">
+								<div class="zone" id="zone" style="display: block;"></div>
+							</div>
+							<span id="erreurMap"></span>
+						</div>
+					</div>
+					<div class="inputGroup">
+						<div class="inputGroup">
+							<label for="line"> Ajouter une ligne :</label>
+							<span class="inputInfo"><a href="./map.html" target="_blank">Carte du nom des lignes</a></span>
+							<div class="inputCont">
+								<input type="text" list="listLines" id="line" placeholder="Rechercher une ligne" size="85">
+							</div>
+						</div>
+						
+						<datalist id="listLines">
+							<option value="Ligne de Courtalain-St-Pellerin à Patay"></option>
+							<option value="Ligne de Montérolier-Buchy à Motteville"></option>
+							<option value="Ligne de Paris-St-Lazare à Ermont-Eaubonne"></option>
+							<option value="Ligne de Culoz à Modane (frontière)"></option>
+							<option value="Ligne d'Auray à Pontivy"></option>
+							<option value="Ligne des Aubrais-Orléans à Montauban-Ville-Bourbon"></option>
+							<option value="Ligne de Lérouville à Metz-Ville"></option>
+							<option value="Ligne de Tours au Mans"></option>
+							<option value="Ligne de Lourches à Valenciennes"></option>
+							<option value="Ligne de Paris-Nord à Lille"></option>
+							<option value="Ligne de Lyon-Perrache P1 à Marseille-St-Charles (via Grenoble)"></option>
+							<option value="Ligne de Rouxmesnil à Eu"></option>
+							<option value="Ligne de St-Benoît à La Rochelle-Ville"></option>
+							<option value="Raccordement de Livron-Sud (bifurcation sud)"></option>
+							<option value="Ligne de Moret-Veneux-les-Sablons à Lyon-Perrache"></option>
+							<option value="Ligne de Paris-Lyon à Marseille-St-Charles"></option>
+							<option value="Raccordement de Santes"></option>
+							<option value="Ligne de Bordeaux-St-Jean à Sète-Ville"></option>
+							<option value="Ligne de Fontenay-le-Comte à Benet"></option>
+							<option value="L'Estaque à Marseille St-Charles"></option>
+							<option value="Ligne de Narbonne à Port-Bou (frontière)"></option>
+							<option value="Ligne de Marseille-St-Charles à Vintimille (frontière)"></option>
+							<option value="Ligne d'Eygurande-Merlines à Clermont-Ferrand"></option>
+							<option value="Ligne de Metz-Ville à Zoufftgen"></option>
+							<option value="Ligne de St-Hilaire-au-Temple à Hagondange"></option>
+							<option value="Ligne de Paris-Austerlitz à Bordeaux-St-Jean"></option>
+							<option value="Ligne de Mommenheim à Sarreguemines"></option>
+							<option value="Ligne de Nantes-Orléans à Saintes"></option>
+							<option value="Ligne de Guingamp à Paimpol"></option>
+							<option value="Ligne de Fretin à Fréthun (LGV)"></option>
+							<option value="Ligne de St-Germain-des-Fossés à Nîmes-CRB1"></option>
+							<option value="Ligne de Tarascon à Sète-Ville"></option>
+							<option value="Ligne de Culmont-Chalindrey à Toul"></option>
+							<option value="Ligne de Tours à St-Nazaire"></option>
+							<option value="Ligne de Bobigny à Sucy-Bonneuil"></option>
+							<option value="Ligne d'Hirson à Amagne-Lucquy"></option>
+							<option value="Ligne de Limoges-Bénédictins à Angoulême"></option>
+							<option value="Ligne de Strasbourg à Lauterbourg"></option>
+							<option value="Ligne de Mouchard à Bourg-en-Bresse"></option>
+							<option value="Ceinture de Metz"></option>
+							<option value="Ligne de Paris-St-Lazare au Havre"></option>
+							<option value="Ligne de Dunkerque-Locale à Bray-Dunes"></option>
+							<option value="Ligne d'Avignon à Miramas"></option>
+							<option value="Ligne de Béziers à Neussargues"></option>
+							<option value="Ligne de Pierrelaye à Creil"></option>
+							<option value="Ligne de Noisy-le-Sec à Strasbourg-Ville"></option>
+							<option value="Ligne de Bordeaux-St-Jean à Irun"></option>
+							<option value="Ligne de Villeneuve-St-Georges à Montargis"></option>
+							<option value="Ligne de Longuyon à Onville et Pagny-sur-Moselle"></option>
+							<option value="Ligne d'Abbeville à Eu"></option>
+							<option value="Ligne de Givors-Canal à Grezan"></option>
+							<option value="Ligne de St-Denis à Dieppe"></option>
+							<option value="Ligne de Combs-la-Ville à St-Louis (LGV)"></option>
+							<option value="Ligne de St-Georges-d'Aurac à St-Étienne-Châteaucreux"></option>
+							<option value="Ligne de Paris-Montparnasse à Brest"></option>
+							<option value="Ligne de Sablé à Montoir-de-Bretagne"></option>
+							<option value="Ligne de Collonges-Fort-l'Écluse à Divonne-les-Bains (frontière)"></option>
+							<option value="Ligne d'Ermont-Eaubonne à Champ-de-Mars (VMI)"></option>
+							<option value="Ligne de Carnoules à Gardanne"></option>
+							<option value="Ligne de Cannes-la-Bocca à Grasse"></option>
+							<option value="Ligne de Jarville-la-Malgrange à Mirecourt"></option>
+							<option value="Ligne de Laroche-Migennes à Cosne"></option>
+							<option value="Ligne de Savenay à Landerneau"></option>
+							<option value="Ligne de Nevers à Chagny"></option>
+							<option value="Ligne de Paris-Est à Mulhouse-Ville"></option>
+							<option value="Raccordement de Livron-Nord (bifurcation nord)"></option>
+							<option value="Ligne de Mohon à Thionville"></option>
+							<option value="Ligne de Graffenstaden à Hausbergen"></option>
+							<option value="Ligne de Vierzon à St-Pierre-des-Corps"></option>
+							<option value="Ligne de Valence à Moirans"></option>
+							<option value="Ligne de Franois à Arc-et-Senans"></option>
+							<option value="Ligne de Castelnaudary à Rodez"></option>
+							<option value="Ligne de Grenoble à Montmélian"></option>
+							<option value="Ligne de La Plaine à Hirson et Anor (frontière)"></option>
+							<option value="Ligne du Trilport à Bazoches"></option>
+							<option value="Ligne de Vitré à Pontorson"></option>
+							<option value="Ligne de Corbeil-Essonnes à Montereau"></option>
+							<option value="Ligne de Coutras à Tulle"></option>
+							<option value="Ligne de Dijon-Ville à St-Amour"></option>
+							<option value="Ligne de Lyon-Perrache à Genève (frontière)"></option>
+							<option value="Ligne de Busseau-sur-Creuse à Ussel"></option>
+							<option value="Ligne de Neuville-de-Poitou à Bressuire"></option>
+							<option value="Ligne de Chagny à Dole-Ville"></option>
+							<option value="Ligne des Invalides à Versailles-Rive-Gauche"></option>
+							<option value="Ligne de Blesme-Haussignémont à Chaumont"></option>
+							<option value="Ligne de Vierzon à Saincaize"></option>
+							<option value="Ligne de St-Germain-du-Puy à Cosne-Cours-sur-Loire"></option>
+							<option value="Ligne de Colmar-Sud à Bollwiller"></option>
+							<option value="Raccordement de Versailles-Matelots"></option>
+							<option value="Ligne d'Andelot-en-Montagne à La Cluse"></option>
+							<option value="Ligne de Strasbourg-Ville à St-Louis"></option>
+							<option value="Ligne de Longueau à Boulogne-Ville"></option>
+							<option value="Ligne de Figeac à Arvant"></option>
+							<option value="Ligne de St-Brieuc au Légué"></option>
+							<option value="Ligne de Cravant-Bazarnes à Dracy-St-Loup"></option>
+							<option value="Ligne de Laon à Liart"></option>
+							<option value="Ligne de Carcassonne à Rivesaltes"></option>
+							<option value="Ligne de Frouard à Novéant"></option>
+							<option value="Ligne de Salbris au Blanc"></option>
+							<option value="Ligne de Livron à Aspres-sur-Buëch"></option>
+							<option value="Ligne d'Argentan à Granville"></option>
+							<option value="Ligne de Flamboin-Gouaix à Montereau"></option>
+							<option value="Ligne de Paris-St-Lazare à Versailles-Rive-Droite"></option>
+							<option value="Ligne de Limoges-Bénédictins à Périgueux"></option>
+							<option value="Ligne de Dole-Ville à Belfort"></option>
+							<option value="Ligne de Portet-St-Simon à Puigcerda (frontière)"></option>
+							<option value="Ligne de St-Roch à Darnétal-Bifurcation"></option>
+							<option value="Ligne de Coni à Vintimille"></option>
+							<option value="Raccordement du Bas-Martineau"></option>
+							<option value="Ligne de Brive-la-Gaillarde à Toulouse-Matabiau via Capdenac"></option>
+							<option value="Ligne de Paris-St-Lazare à Mantes-Station par Conflans-Ste-Honorine"></option>
+							<option value="Ligne de la grande ceinture de Paris"></option>
+							<option value="Ligne de Paray-le-Monial à Givors-Canal"></option>
+							<option value="Ligne de Blainville-Damelevières à Lure"></option>
+							<option value="Ligne de Besançon-Viotte au Locle-Col-des-Roches"></option>
+							<option value="Ligne de Plaisir-Grignon à Épône-Mézières"></option>
+							<option value="Raccordement de Noisy-le-Sec"></option>
+							<option value="Ligne de Mignaloux-Nouaillé à Bersac"></option>
+							<option value="Ligne de Paris-Montparnasse à Monts (LGV)"></option>
+							<option value="Ligne de Lutterbach à Kruth"></option>
+							<option value="Ligne de Laveline-devant-Bruyères à Gérardmer"></option>
+							<option value="Ligne de Vendenheim à Wissembourg"></option>
+							<option value="Ligne de Lyon-Croix-Rousse à Trévoux"></option>
+							<option value="Ligne de Lyon-St-Clair à Bourg-en-Bresse"></option>
+							<option value="Ligne de Graffenstaden à Strasbourg-Neudorf"></option>
+							<option value="Ligne de Niversac à Agen"></option>
+							<option value="Ligne de Lannemezan à Arreau-Cadéac"></option>
+							<option value="Ligne de Paris à Strasbourg (LGV)"></option>
+							<option value="Ligne de Bayonne à St-Jean-Pied-de-Port"></option>
+							<option value="Ligne de Perpignan à Villefranche-Vernet-les-Bains"></option>
+							<option value="Ligne de Fives à Abbeville"></option>
+							<option value="Ligne de Brétigny à La Membrolle-sur-Choisille"></option>
+							<option value="Ligne de Lutterbach à Rixheim"></option>
+							<option value="Ligne de Mâcon à Ambérieu"></option>
+							<option value="Ligne d'Achères à Pontoise"></option>
+							<option value="Ligne de Fives à Hirson"></option>
+							<option value="Ligne du Teil à Alès"></option>
+							<option value="Ligne des Sables-d'Olonne à Tours"></option>
+							<option value="Ligne d'Épinay-Villetaneuse au Tréport-Mers"></option>
+							<option value="Ligne de Souillac à Viescamp-sous-Jallès"></option>
+							<option value="Ligne de Busigny à Somain"></option>
+							<option value="Raccordement de Lyon-Guillotière"></option>
+							<option value="Ligne de Siorac-en-Périgord à Cazoulès"></option>
+							<option value="Ligne de Puyoô à Dax"></option>
+							<option value="Ligne de Montluçon à Moulins"></option>
+							<option value="Ligne de Soissons à Givet"></option>
+							<option value="Ligne de Vichy à Riom"></option>
+							<option value="Ligne de Cahors à Capdenac"></option>
+							<option value="Ligne de Ste-Pazanne à Pornic"></option>
+							<option value="Ligne de Vallentigny à Vitry-le-François"></option>
+							<option value="Ligne de Lyon-St-Paul à Montbrison"></option>
+							<option value="Ligne de Villefranche-Vernet-les-Bains à Latour-de-Carol"></option>
+							<option value="Raccordement de Mâcon-Sud"></option>
+							<option value="Ligne de Tulle à Meymac"></option>
+							<option value="Ligne de St-Césaire au Grau-du-Roi"></option>
+							<option value="Raccordement de Limoges-Puy-Imbert à Limoges-Montjovis"></option>
+							<option value="Ligne de Bourg-en-Bresse à Bellegarde"></option>
+							<option value="Ligne de Capdenac à Rodez"></option>
+							<option value="Ligne de Bourges à Miécaze"></option>
+							<option value="Ligne de Moulins à Mâcon"></option>
+							<option value="Ligne de Châlons-en-Champagne à Reims-Cérès"></option>
+							<option value="Ligne de Veynes à Briançon"></option>
+							<option value="Ligne de Vias à Lodève"></option>
+							<option value="Ligne de Boulogne-Ville à Calais-Maritime"></option>
+							<option value="Ligne de Montsoult-Maffliers à Luzarches"></option>
+							<option value="Ligne de St-Benoît au Blanc"></option>
+							<option value="Ligne de St-Pierre-du-Vauvray à Louviers"></option>
+							<option value="Ligne de Mantes-la-Jolie à Cherbourg"></option>
+							<option value="Raccordement militaire d'Aulnoye"></option>
+							<option value="Ligne de Strasbourg-Ville à St-Dié"></option>
+							<option value="Ligne de Coolus à Sens"></option>
+							<option value="Ligne d'Ormoy-Villers à Boves"></option>
+							<option value="Ligne de Metz-Ville à la frontière allemande vers Ueberherrn"></option>
+							<option value="Ligne de Joué-lès-Tours à Châteauroux"></option>
+							<option value="Ligne du Mans à Angers-Maître-École"></option>
+							<option value="Ligne de Toulouse à Bayonne"></option>
+							<option value="Ligne de Charleville-Mézières à Hirson"></option>
+							<option value="Ligne de Chartres à Bordeaux-St-Jean"></option>
+							<option value="Ligne de St-Cyr à Surdon"></option>
+							<option value="Ligne de Steinbourg à Schweighouse-sur-Moder"></option>
+							<option value="Ligne de Libourne au Buisson"></option>
+							<option value="Ligne Rhin-Rhône (LGV)"></option>
+							<option value="Ligne de Somain à Halluin"></option>
+							<option value="Ligne d'Aubagne à La Barque"></option>
+							<option value="Ligne de St-Pol-sur-Ternoise à Étaples"></option>
+							<option value="Ligne de Reims à Laon"></option>
+							<option value="Ligne de Clisson à Cholet"></option>
+							<option value="Ligne de Toul à Rosières-aux-Salines"></option>
+							<option value="Ligne du Palais à Eygurande-Merlines"></option>
+							<option value="Ligne de Dijon-Ville à Vallorbe (frontière)"></option>
+							<option value="Ligne de Clermont-Ferrand à St-Just-sur-Loire"></option>
+							<option value="Ligne de Port-Ste-Marie à Riscle"></option>
+							<option value="Ligne de Conflans-Ste-Honorine à Éragny-Neuville"></option>
+							<option value="Ligne d'Is-sur-Tille à Culmont-Chalindrey"></option>
+							<option value="Ligne de Bondy à Aulnay-sous-Bois"></option>
+							<option value="Ligne de Haguenau à Hargarten-Falck"></option>
+							<option value="Ligne d'Alençon à Domfront"></option>
+							<option value="Raccordement d'Achères Voie 1A"></option>
+							<option value="Ligne de Lille aux Fontinettes"></option>
+							<option value="Raccordement de Lyon-St-Clair (LGV)"></option>
+							<option value="Ligne de Longeray-Léaz au Bouveret"></option>
+							<option value="Ligne des Angles à Lattes (LGV )"></option>
+							<option value="Déviation de la ligne de Grenoble à Montmélian"></option>
+							<option value="Ligne de Nantes-Orléans à Châteaubriant"></option>
+							<option value="Ligne de Réding à Metz-Ville"></option>
+							<option value="Ligne de Nouvel-Avricourt à Bénestroff"></option>
+							<option value="Ligne d'Aix-les-Bains-Le Revard à Annemasse"></option>
+							<option value="Ligne du Coteau à Montchanin"></option>
+							<option value="Raccordement de Coubert (LGV)"></option>
+							<option value="Ligne de Creil à Jeumont"></option>
+							<option value="Ligne de Merrey à Hymont-Mattaincourt"></option>
+							<option value="Ligne de Lison à Lamballe"></option>
+							<option value="Ligne du Monastier à La Bastide-St-Laurent-les-Bains"></option>
+							<option value="Raccordement direct de Blesme-Haussignémont"></option>
+							<option value="Ligne de Miramas à L'Estaque"></option>
+							<option value="Ligne de St-Germain-des-Fossés à Darsac"></option>
+							<option value="Ligne de Longuyon à Mont-St-Martin (vers Athus)"></option>
+							<option value="Ligne de St-Gervais-les-Bains-Le Fayet à Vallorcine (frontière)"></option>
+							<option value="Ligne de Gretz-Armainvilliers à Sézanne"></option>
+							<option value="Boucle de Vaires"></option>
+							<option value="Raccordement de Pont-de-Veyle"></option>
+							<option value="Ligne de Sévérac-le-Château à Rodez"></option>
+							<option value="Ligne de St-André-le-Gaz à Chambéry"></option>
+							<option value="Ligne du Coteau à St-Germain-au-Mont-d'Or"></option>
+							<option value="Ligne d'Annecy à Albertville"></option>
+							<option value="Raccordement de Gagny-Tronc-Commun"></option>
+							<option value="Raccordement de Tours à Monts (bifurcation de Bordeaux)"></option>
+							<option value="Ligne de Lavalduc à Fos-Coussoul (dépôts pétroliers)"></option>
+							<option value="Ligne du Mans à Mézidon"></option>
+							<option value="Ligne de Nanterre-Université à Sartrouville"></option>
+							<option value="Ligne de Thionville à Anzeling"></option>
+							<option value="Raccordement de Châlons Sud"></option>
+							<option value="Ligne de Narbonne à Bize"></option>
+							<option value="Ligne d'Étampes à Beaune-la-Rolande"></option>
+							<option value="Ligne de Bort-les-Orgues à Neussargues"></option>
+							<option value="Ligne de Paris-St-Lazare à St-Germain-en-Laye"></option>
+							<option value="Ligne de St-Julien (Troyes) à Gray"></option>
+							<option value="Ligne de Gisors-Embranchement à Pont-de-l'Arche"></option>
+							<option value="Ligne de St-Agne à Auch"></option>
+							<option value="Ligne de Nice à Breil-sur-Roya"></option>
+							<option value="Ligne de Morcenx à Bagnères-de-Bigorre"></option>
+							<option value="Ligne d'Arras à Dunkerque-Locale"></option>
+							<option value="Ligne de St-Pierre-d'Albigny à Bourg-St-Maurice"></option>
+							<option value="Ligne de La Ferté-Hauterive à Gannat"></option>
+							<option value="Ligne de Montluçon à St-Sulpice-Laurière"></option>
+							<option value="Ligne de Paulhan à Montpellier"></option>
+							<option value="Ligne de Gonesse à Lille-Frontière (LGV)"></option>
+							<option value="Ligne de Gray à St-Jean-de-Losne"></option>
+							<option value="Ligne de St-Louis à Huningue"></option>
+							<option value="Ligne de Haguenau à Roeschwoog et frontière"></option>
+							<option value="Ligne de Morlaix à Roscoff"></option>
+							<option value="Ligne de Malaunay-Le Houlme à Dieppe"></option>
+							<option value="Ligne de Bréauté-Beuzeville à Fecamp"></option>
+							<option value="Ligne de Besançon-Viotte à Vesoul"></option>
+							<option value="Ligne de Castelsarrasin à Beaumont-de-Lomagne"></option>
+							<option value="Ligne d'Ermont-Eaubonne à Valmondois"></option>
+							<option value="Ligne de St-Just-en-Chaussée à Douai"></option>
+							<option value="Voie du port de Lorient"></option>
+							<option value="Ligne de Givors-Canal à Chasse-sur-Rhône"></option>
+							<option value="Ligne de Lapeyrouse à Volvic"></option>
+							<option value="Ligne de Douai à Blanc-Misseron"></option>
+							<option value="Ligne de Lens à Don-Sainghin"></option>
+							<option value="Ligne de Lisieux à Trouville-Deauville"></option>
+							<option value="Ligne de Lamothe à Arcachon"></option>
+							<option value="Ligne de Choisy-le-Roi à Massy-Verrières"></option>
+							<option value="Ligne de Plouaret à Lannion"></option>
+							<option value="Ligne de Corbenay à Faymont"></option>
+							<option value="Ligne de Colmar-Central à Neuf-Brisach"></option>
+							<option value="Ligne de la bifurcation de Neuville à Cergy-Préfecture"></option>
+							<option value="Ligne de Courtalain à Connerré (LGV)"></option>
+							<option value="Ligne de Lunéville à St-Dié"></option>
+							<option value="Ligne de Longueville à Esternay"></option>
+							<option value="Ligne de Beillant à Angoulême"></option>
+							<option value="Ligne de Rémilly à Stiring-Wendel"></option>
+							<option value="Raccordement d'Orléans vers Vierzon"></option>
+							<option value="Ligne d'Épernay à Reims"></option>
+							<option value="Ligne de La Madeleine à Comines-France"></option>
+							<option value="Raccordement évite-Perrigny"></option>
+							<option value="Ligne d'Évreux-Embranchement à Acquigny"></option>
+							<option value="Ligne de Belfort à Delle"></option>
+							<option value="Ligne de Chartres à Orléans"></option>
+							<option value="Ligne de Collonges-Fontaines à Lyon-Guillotière"></option>
+							<option value="Raccordement de la ligne EOLE à la ligne Paris-Mulhouse"></option>
+							<option value="Ligne de Berthelming à Sarreguemines"></option>
+							<option value="Ligne de Lérouville à Pont-Maugis"></option>
+							<option value="Ligne de Bouzonville à Guerstling"></option>
+							<option value="Ligne d'Aulnay-sous-Bois à Roissy 2-RER"></option>
+							<option value="Ligne de Kalhausen à Sarralbe"></option>
+							<option value="Ligne de St-Brieuc à Pontivy"></option>
+							<option value="Ceinture de Bordeaux"></option>
+							<option value="Raccordement d'interconnexion nord-sud (LGV)"></option>
+							<option value="Ligne de La Roche-sur-Foron à St-Gervais-les-Bains-Le Fayet"></option>
+							<option value="Ligne d'Évreux-Embranchement à Quetteville"></option>
+							<option value="Ligne de La Possonnière à Niort"></option>
+							<option value="Ligne de Valleroy-Moineville à Villerupt-Micheville"></option>
+							<option value="Ligne de Voujeaucourt à St-Hippolyte"></option>
+							<option value="Ligne de Bourron-Marlotte-Grez à Malesherbes"></option>
+							<option value="Ligne de Guingamp à Carhaix"></option>
+							<option value="Ligne de Lutterbach à Rond point Stricker"></option>
+							<option value="Ligne de St-Auban à Digne"></option>
+							<option value="Ligne de Quai-d'Orsay à Paris-Austerlitz"></option>
+							<option value="Raccordement de St-Pierre-des-Corps vers Nantes"></option>
+							<option value="Boucle de Dunkerque"></option>
+							<option value="Voie navette"></option>
+							<option value="Raccordement de Messy"></option>
+							<option value="Ligne de Nançois-Tronville à Neufchâteau"></option>
+							<option value="Raccordement de Herny"></option>
+							<option value="Ligne de Nexon à Brive-la-Gaillarde"></option>
+							<option value="Ligne de Langres à Andilly-en-Bassigny"></option>
+							<option value="Ligne de Rouen-Gauche à Petit-Couronne (voies des quais)"></option>
+							<option value="Ligne de Rennes à Redon"></option>
+							<option value="Ligne de Frasne à Verrières-de-Joux (frontière)"></option>
+							<option value="Ligne de Réding à Diemeringen"></option>
+							<option value="Ligne d'Étang à Santenay (via Autun)"></option>
+							<option value="Ligne de Firminy à St-Rambert-d'Albon"></option>
+							<option value="Ligne de St-Omer à Hesdigneul"></option>
+							<option value="Ligne de Commentry à Gannat"></option>
+							<option value="Ligne de St-Julien (Troyes) à St-Florentin-Vergigny"></option>
+							<option value="Raccordement des lignes de Chagny à Dole et de Paris-Lyon à Marseille-St-Charles"></option>
+							<option value="Raccordement de Fretin"></option>
+							<option value="Ligne de Mulhouse-Ville à Chalampé"></option>
+							<option value="Ligne de Châteaubriant à Rennes"></option>
+							<option value="Ligne de Rennes à St-Malo-St-Servan"></option>
+							<option value="Ligne de Vaivre à Gray"></option>
+							<option value="Ligne de Creil à Beauvais"></option>
+							<option value="Ligne de Colmar-Central à Metzeral"></option>
+							<option value="Raccordement de Lezennes"></option>
+							<option value="Raccordement de Narbonne-Triangle"></option>
+							<option value="Ligne de Rosporden à Concarneau"></option>
+							<option value="Ligne de Sélestat à Saverne"></option>
+							<option value="Ligne de Strasbourg-Ville à Strasbourg-Port-du-Rhin"></option>
+							<option value="Ligne de Serquigny à Oissel"></option>
+							<option value="Ligne de Chartres à Dreux"></option>
+							<option value="Ligne d'Esbly à Crécy-la-Chapelle"></option>
+							<option value="Ligne de Montauban-Ville-Bourbon à La Crémade"></option>
+							<option value="Ligne de Montréjeau-Gourdan-Polignan à Luchon"></option>
+							<option value="Raccordement de Longueil-Ste-Marie"></option>
+							<option value="Raccordement de St-Cyr"></option>
+							<option value="Raccordement de Noisy-le-Sec-Sud"></option>
+							<option value="Ligne de La Flèche à Vivy"></option>
+							<option value="Voie-mère de St-Quentin (Origny-Ste-Benoite)"></option>
+							<option value="Raccordement de Mohon"></option>
+							<option value="Ligne du Martinet à Beaucaire"></option>
+							<option value="Ligne de Oiry-Mareuil à Romilly-sur-Seine"></option>
+							<option value="Ligne d'Amiens à Laon"></option>
+							<option value="Voie de desserte du môle minéralier de Fos"></option>
+							<option value="Raccordement d'Ambérieu"></option>
+							<option value="Ligne de Fives à Baisieux"></option>
+							<option value="Ligne du Havre-Graville à Tourville-les-Ifs"></option>
+							<option value="Raccordement de Dunkerque-Ouest"></option>
+							<option value="Ligne de Saintes à Royan"></option>
+							<option value="Ligne de Fives à Mouscron (frontière)"></option>
+							<option value="Raccordement des Chartreux"></option>
+							<option value="Ligne d'Épinal à Bussang"></option>
+							<option value="Ligne de St-Cloud à St-Nom-la-Bretèche-Forêt-de-Marly"></option>
+							<option value="Ligne du Dorat à Limoges-Bénédictins"></option>
+							<option value="Ligne de St-Georges-Motel à Grand-Quevilly"></option>
+							<option value="Voie-mère d'Ostricourt"></option>
+							<option value="Ligne de Thionville à Apach"></option>
+							<option value="Raccordement de Viroflay"></option>
+							<option value="Ligne de Port-de-Piles à Argenton-sur-Creuse"></option>
+							<option value="Ligne de Nuits-sous-Ravières à Châtillon-sur-Seine"></option>
+							<option value="Ligne de Motteville à St-Valery-en-Caux"></option>
+							<option value="Ligne de Bologne à Pagny-sur-Meuse"></option>
+							<option value="Raccordement de Vendenheim"></option>
+							<option value="Ligne d'Amagne-Lucquy à Revigny"></option>
+							<option value="Raccordement de Strasbourg-Neudorf à Strasbourg-Koenigshoffen"></option>
+							<option value="Raccordement maritime du Havre"></option>
+							<option value="Ligne de Valenciennes-Faubourg-de-Paris à Hautmont"></option>
+							<option value="Ligne de Coudekerque-Branche aux Fontinettes"></option>
+							<option value="Ligne d'Arches à St-Dié"></option>
+							<option value="Raccordement des Fontaines (Le Mans)"></option>
+							<option value="Ligne de Lens à Ostricourt"></option>
+							<option value="Ligne d'Arras à St-Pol-sur-Ternoise"></option>
+							<option value="Embranchement maritime est du port du Havre"></option>
+							<option value="Ligne de Ravezies à Pointe-de-Grave"></option>
+							<option value="Ligne de La Guerche-sur-l'Aubois à Marseille-lès-Aubigny"></option>
+							<option value="Raccordement de Lyon-Guillotière à Lyon-Part-Dieu"></option>
+							<option value="Ligne de Lisieux à Honfleur"></option>
+							<option value="Ligne de Pressins à Virieu-le-Grand"></option>
+							<option value="Raccordement de St-Marcel-lès-Valence"></option>
+							<option value="Ligne de Nantes-État à La Roche-sur-Yon par Ste-Pazanne"></option>
+							<option value="Voies de liaison de Dijon à Gevrey-Chambertin"></option>
+							<option value="Ligne d'Haubourdin à St-André"></option>
+							<option value="Ligne de Chalon-sur-Saône à Bourg-en-Bresse"></option>
+							<option value="Ligne de Bréauté-Beuzeville à Gravenchon-Port-Jérôme"></option>
+							<option value="Ligne de Bricon à Châtillon-sur-Seine"></option>
+							<option value="Raccordement de Valenton"></option>
+							<option value="Raccordement de Neuves-Maisons n° 1"></option>
+							<option value="Ligne de Maison-Dieu aux Laumes-Alésia"></option>
+							<option value="Ligne de Neufchâteau à Épinal"></option>
+							<option value="Ligne de Bazancourt à Challerange"></option>
+							<option value="Ligne d'Auxy-Juranville à Bourges"></option>
+							<option value="Raccordement de L'Estaque-Joliette à Marseille-Canet"></option>
+							<option value="Raccordement de Culmont-Chalindrey"></option>
+							<option value="Ligne de Bully-Grenay à Brias"></option>
+							<option value="Raccordement de Chasse-sur-Rhône"></option>
+							<option value="Ligne de Rognac à Aix-en-Provence"></option>
+							<option value="Ligne des Aubrais-Orléans à Malesherbes"></option>
+							<option value="Ligne de La Plaine à Ermont-Eaubonne"></option>
+							<option value="Ligne de Sète-Ville à Montbazin-Gigean"></option>
+							<option value="Ligne de Mézidon à Trouville-Deauville"></option>
+							<option value="Ligne de Liart à Tournes"></option>
+							<option value="Raccordement direct de Frouard"></option>
+							<option value="Raccordement de Strasbourg à Koenigshoffen-Nord"></option>
+							<option value="Raccordement d'Avion"></option>
+							<option value="Ligne de La Pauline-Hyères aux Salins-d'Hyères"></option>
+							<option value="Ligne d'Aubigny-au-Bac à Somain"></option>
+							<option value="Ligne de Pont-de-Braye à Blois"></option>
+							<option value="Raccordement de Metz-Ville à Metz-Marchandises"></option>
+							<option value="Ligne de Mézy à Romilly-sur-Seine"></option>
+							<option value="Ligne des Arcs à Draguignan"></option>
+							<option value="Raccordement de Reims n° 1"></option>
+							<option value="Ligne d'Aubigné-Racan à Sablé"></option>
+							<option value="Raccordement de Valenton (LGV)"></option>
+							<option value="Raccordement de Villeneuve-lès-Avignon"></option>
+							<option value="Ligne de Segré à Nantes-État"></option>
+							<option value="Ligne de Cavaillon à St-Maime-Dauphin"></option>
+							<option value="Raccordement de Grenay (LGV)"></option>
+							<option value="Raccordement de St-André"></option>
+							<option value="Ligne de La Rochelle-Ville à La Rochelle-Pallice"></option>
+							<option value="Ligne de Boussens à St-Girons"></option>
+							<option value="Raccordement de La Duboisière (Le Mans)"></option>
+							<option value="Ligne de La Râpée à Batignolles (petite ceinture de Paris)"></option>
+							<option value="Raccordement du dépôt de Sotteville"></option>
+							<option value="Raccordement d'Épernay"></option>
+							<option value="Ligne de Dijon-Ville à Is-sur-Tille"></option>
+							<option value="Ligne de Tessonnières à Albi"></option>
+							<option value="Ligne de St-Nazaire au Croisic"></option>
+							<option value="Ligne de Lourdes à Pierrefitte-Nestalas"></option>
+							<option value="Ligne de Castres à Bédarieux"></option>
+							<option value="Ligne de Bollwiller à Lautenbach"></option>
+							<option value="Ligne d'Elne à Arles-sur-Tech"></option>
+							<option value="Ligne d'Orléans à Gien"></option>
+							<option value="Raccordement de Peyraud (bifurcation nord)"></option>
+							<option value="Ligne de Dole-Ville à Poligny"></option>
+							<option value="Voie-mère de Woippy n° 2"></option>
+							<option value="Ligne de Bon-Encontre à Vic-en-Bigorre"></option>
+							<option value="Ligne d'Arles à Lunel"></option>
+							<option value="Raccordement de Lérouville n° 2"></option>
+							<option value="Raccordement de Rivecourt-Nord"></option>
+							<option value="Raccordement de Montmélian"></option>
+							<option value="Ligne de Pau à Canfranc (frontière)"></option>
+							<option value="Raccordement de St-Amour (à Gevrey-Chambertin)"></option>
+							<option value="Ligne des Aubrais-Orléans à Orléans"></option>
+							<option value="Ligne d'Ouest-Ceinture à Chartres"></option>
+							<option value="Saut-de-mouton de Toul"></option>
+							<option value="Raccordement de Tassin (SHUNT-TT)"></option>
+							<option value="Ligne de La Peyrade-Bifurcation à Sète-Méditerranée"></option>
+							<option value="Ligne de Bassens au Bec-d'Ambès"></option>
+							<option value="Ligne de Dreux à St-Aubin-du-Vieil-Évreux"></option>
+							<option value="Ligne de Sorgues-Châteauneuf-du-Pape à Carpentras"></option>
+							<option value="Ligne de Jessains à Sorcy"></option>
+							<option value="Ligne de Paris-Nord à Paris-Gare-de-Lyon (RER ligne D)"></option>
+							<option value="Raccordement de la bifurcation de Wanne à Mulhouse-Ville"></option>
+							<option value="Ligne de Rochy-Condé à Soissons"></option>
+							<option value="Ligne de Champigneulles à Sarralbe"></option>
+							<option value="Raccordement d'Avignon"></option>
+							<option value="Raccordement de Sarrebourg à Sarraltroff"></option>
+							<option value="Ligne de Montargis à Sens"></option>
+							<option value="Ligne de Clamecy à Nevers"></option>
+							<option value="Raccordement de Bourges au poste C de Pont-Vert"></option>
+							<option value="Raccordement de Belfort"></option>
+							<option value="Ligne de Marmande à Mont-de-Marsan"></option>
+							<option value="Raccordement du Rody au port de Brest"></option>
+							<option value="Raccordement d'Arras-Nord"></option>
+							<option value="Raccordement d'Annet"></option>
+							<option value="Ligne de Cheval-Blanc à Pertuis"></option>
+							<option value="Ligne de Villeneuve-St-Georges à la bifurcation de Moisenay (LGV)"></option>
+							<option value="Ligne de Bayonne à Allées-Marines"></option>
+							<option value="Ligne de Ploërmel à La Brohinière"></option>
+							<option value="Raccordement d'Arras-Sud"></option>
+							<option value="Raccordement de l'Évangile"></option>
+							<option value="Ligne de Poitiers à Arçay"></option>
+							<option value="Ligne de Bessèges à Robiac"></option>
+							<option value="Raccordement sud de Villeneuve-lès-Avignon"></option>
+							<option value="Raccordement d'Eauplet"></option>
+							<option value="Raccordement des Trois Puits"></option>
+							<option value="Ligne de Conflans-Jarny à Metz-Ville"></option>
+							<option value="Raccordement du Bourget"></option>
+							<option value="Ligne d'Hautmont à Feignies (frontière)"></option>
+							<option value="Raccordement de Strasbourg à Koenigshoffen-Sud"></option>
+							<option value="Raccordement de Nimes-Alès"></option>
+							<option value="Raccordement de Bischheim"></option>
+							<option value="Ligne de Beaulieu-le-Coudray à Auneau-Embranchement"></option>
+							<option value="Raccordement de St-Georges (Le Mans)"></option>
+							<option value="Ligne de Doullens à Arras"></option>
+							<option value="Ligne de St-Roch à Frévent"></option>
+							<option value="Ligne de Grigny à Corbeil-Essonnes"></option>
+							<option value="Raccordement de Ronchin"></option>
+							<option value="Raccordement des Piquettes"></option>
+							<option value="Raccordement d'Épluches"></option>
+							<option value="Ligne de Laqueuille au Mont-Dore"></option>
+							<option value="Ligne de Maubeuge à Fourmies"></option>
+							<option value="Raccordement de Pagny"></option>
+							<option value="Raccordement de St-Pierre-des-Corps à Tours"></option>
+							<option value="Raccordement de Vandières"></option>
+							<option value="Raccordement de Douai"></option>
+							<option value="Ligne d'Armentières à Arques"></option>
+							<option value="Raccordement des deux gares"></option>
+							<option value="Raccordement nord de Villeneuve-Triage"></option>
+							<option value="Raccordement de Massy (LGV)"></option>
+							<option value="Raccordement de Cassel"></option>
+							<option value="Ligne de Paris-Est à Pont-Cardinet (EOLE)"></option>
+							<option value="Ligne de Bas-Évette à Giromagny"></option>
+							<option value="Ligne de Chaugey à Lons-le-Saunier"></option>
+							<option value="Raccordement de Vémars"></option>
+							<option value="Ligne de Marseille-Blancarde à Marseille-Prado"></option>
+							<option value="Raccordement TGV du SOLER"></option>
+							<option value="Ligne de St-Lô à Guilberville"></option>
+							<option value="Raccordement marché gare de Rungis voie MG"></option>
+							<option value="Raccordement de Beuvrages"></option>
+							<option value="Raccordement de Rougebarre"></option>
+							<option value="Ligne de Troyes à Brienne-le-Château"></option>
+							<option value="Saut-de-mouton de Culmont-Chalindrey"></option>
+							<option value="Raccordement de La Folie (La Garenne-Bezons)"></option>
+							<option value="Ligne de Lézan à St-Jean-du-Gard"></option>
+							<option value="Raccordement sud de Lavalduc"></option>
+							<option value="Voie-mère de la ZI de Volvic à Riom"></option>
+							<option value="Ligne du Puy à Langogne"></option>
+							<option value="Voie-mère du Bourget (Garonor)"></option>
+							<option value="Raccordement de Troyes-Preize"></option>
+							<option value="Raccordement de St-Pierre-des-Corps (LGV)"></option>
+							<option value="Raccordement d'Éragny"></option>
+							<option value="Ligne de Seurre à Chalon-sur-Saône"></option>
+							<option value="Ligne d'Aiffres à Ruffec"></option>
+							<option value="Raccordement de Sallaumines"></option>
+							<option value="Ligne de Lussac-les-Châteaux à St-Saviol"></option>
+							<option value="Raccordement d'Heyrieux (LGV)"></option>
+							<option value="Raccordement de Badan (poste 1) à Chasse-sur-Rhône (poste 3)"></option>
+							<option value="Voie de desserte de Fos-Graveleau"></option>
+							<option value="Ligne de Sélestat à Lesseux-Frapelle"></option>
+							<option value="Ligne de Sarreguemines vers Sarrebruck"></option>
+							<option value="Raccordement militaire de Laroche-Migennes"></option>
+							<option value="Raccordement de La Clarté (Le Mans)"></option>
+							<option value="Raccordement de Lyon (Dijon-Perrigny)"></option>
+							<option value="Raccordement 1J des Ambassadeurs"></option>
+							<option value="Raccordement de Baudrecourt"></option>
+							<option value="Raccordement supérieur de Longvic"></option>
+							<option value="Raccordement de Pasilly à Aisy"></option>
+							<option value="Ligne de Loudun à Châtellerault"></option>
+							<option value="Raccordement d'Uckange"></option>
+							<option value="Ligne de Commequiers à St-Gilles-Croix-de-Vie"></option>
+							<option value="Ligne de Villeneuve-lès-Avignon à Avignon"></option>
+							<option value="Raccordement sud de Tarascon"></option>
+							<option value="Ligne de Lyon-Gorge-de-Loup à Lyon-Vaise"></option>
+							<option value="Raccordement de Mulhouse-Dornach à Mulhouse-Nord"></option>
+							<option value="Raccordement de La Défense"></option>
+							<option value="Ligne de Dieppe à Fécamp"></option>
+							<option value="Raccordement branche grand-sud du triangle des Angles (LGV)"></option>
+							<option value="Raccordement TGV de Perrigny"></option>
+							<option value="Voie de desserte de Port-St-Louis-du-Rhône"></option>
+							<option value="Raccordement de Gagny-Nord"></option>
+							<option value="Raccordement à niveau de Longvic"></option>
+							<option value="Raccordement nord de Villiers-sur-Marne"></option>
+							<option value="Ligne de Carignan à Messempré"></option>
+							<option value="Raccordement militaire de Saincaize"></option>
+							<option value="Ligne de Sillé-le-Guillaume à La Hutte-Coulombiers"></option>
+							<option value="Raccordement court de Mulhouse"></option>
+							<option value="Raccordement de La Plumasserie (Le Mans)"></option>
+							<option value="Voie de desserte de Moureplane"></option>
+							<option value="Ligne de Vichy à Cusset"></option>
+							<option value="Virgule d'Avignon Courtine"></option>
+							<option value="Voie-mère de Martigues à Lavera"></option>
+							<option value="Raccordement de St-Fons"></option>
+							<option value="Ligne de Mas-des-Gardies aux Mazes-le-Crès"></option>
+							<option value="Raccordement nord de Tarascon"></option>
+							<option value="Ligne de Beuvry à Béthune-Rivage"></option>
+							<option value="Ligne de Sotteville à Rouen-Rive-Gauche"></option>
+							<option value="Raccordement de Darnétal à Rouen-Rive-Droite"></option>
+							<option value="Raccordement des Américains (Nantes)"></option>
+							<option value="Raccordement de Mondelange"></option>
+							<option value="Raccordement de Commequiers"></option>
+							<option value="Ligne de Montbozon à Lure"></option>
+							<option value="Raccordement sud de Peyraud"></option>
+							<option value="Raccordement de Reims n° 3"></option>
+							<option value="Raccordement de Pontlieue (Le Mans)"></option>
+							<option value="Raccordement de Libercourt"></option>
+							<option value="Ligne de St-Satur à St-Satur-Gare-d'Eau"></option>
+							<option value="Raccordement de La Chapelle-St-Denis"></option>
+							<option value="Raccordement de Gagny-Sud"></option>
+							<option value="Raccordement des Ageux"></option>
+							<option value="Ligne de Bettembourg à Audun-le-Tiche"></option>
+							<option value="Raccordement sud de La Voulte (bifurcation sud)"></option>
+							<option value="Raccordement de Villers-les-Pots n° 1"></option>
+							<option value="Raccordement de La Chapelle-Charbons"></option>
+							<option value="Raccordement du Pont-Rouge"></option>
+							<option value="Voies du port de Rouen-Rive-Droite"></option>
+							<option value="Ligne d'Armentières à Houplines"></option>
+							<option value="Ligne des Invalides à Quai-d'Orsay"></option>
+							<option value="Voie-mère de St-Quentin-Fallavier"></option>
+							<option value="Raccordement de Toul n° 1"></option>
+							<option value="Raccordement de Waville"></option>
+							<option value="Raccordement de Cheval-Blanc"></option>
+							<option value="Raccordement nord de La Voulte (bifurcation nord)"></option>
+							<option value="Ligne de Clamecy à Gilly-sur-Loire"></option>
+							<option value="Raccordement de La Plaine"></option>
+							<option value="Raccordement nord de Bollène-Lamotte-du-Rhône"></option>
+							<option value="Ligne de Neuf-Brisach à Bantzenheim"></option>
+							<option value="Raccordement de PETIT - CROIX"></option>
+							<option value="Saut-de-mouton de Bazancourt"></option>
+							<option value="Raccordement d'Ambarès-et-Lagrave"></option>
+							<option value="Raccordement de Connerré-Sud"></option>
+							<option value="Ligne de Culmont-Chalindrey à Gray"></option>
+							<option value="Raccordement de Vigneux-sur-Seine voie 2M/voie 2 bis C"></option>
+							<option value="Ligne de Port-de-Bouc à Caronte-la-Gafette"></option>
+							<option value="Raccordement de Fin-d'Oise"></option>
+							<option value="Raccordement de Soulezard"></option>
+							<option value="Raccordement de l'Yser"></option>
+							<option value="Ligne de Longuyon à Mont-St-Martin (vers Luxembourg)"></option>
+							<option value="Raccordement de Graville (est)"></option>
+							<option value="Raccordement EST de Besançon TGV"></option>
+							<option value="Raccordement de Cambrai-Sud"></option>
+							<option value="Raccordement de Graville (ouest)"></option>
+							<option value="Raccordement de Strasbourg-Cronenbourg à Strasbourg-Koenigshoffen VK"></option>
+							<option value="Ligne d'Albi à St-Juéry"></option>
+							<option value="Raccordement de St Germain des Fossès"></option>
+							<option value="Raccordement de Sucy-Bonneuil (voie M)"></option>
+							<option value="Raccordement de Blangy-les-Arras"></option>
+							<option value="Ligne de St-Just-sur-Loire à St-Just-St-Rambert"></option>
+							<option value="Raccordement de Châteauneuf sur Isère"></option>
+							<option value="Raccordement de Crest (base d'Eurre)"></option>
+							<option value="Raccordement de Strasbourg-Cronenbourg à Strasbourg-Ville"></option>
+							<option value="Raccordement sud de Miramas"></option>
+							<option value="Ligne de Villefranche-sur-Cher à Blois"></option>
+							<option value="Raccordement de Port-Vendres-Ville à Port-Vendres-Quais"></option>
+							<option value="Raccordement sud de Fos-Graveleau"></option>
+							<option value="Ligne de Triguères à Surgy"></option>
+							<option value="Ligne de Port-Boulet à Port-de-Piles"></option>
+							<option value="Ligne d'Auray à Quiberon"></option>
+							<option value="Raccordement de Sotteville à Darnétal"></option>
+							<option value="Raccordement de Châlons Nord"></option>
+							<option value="Ligne de Roubaix-Wattrelos à Wattrelos"></option>
+							<option value="Raccordement de Pierrefitte"></option>
+							<option value="Ligne de Marseille-Arenc à Marseille-Canet"></option>
+							<option value="Raccordement de Cambrai-Nord"></option>
+							<option value="Raccordement de Mézidon"></option>
+							<option value="Raccordement de Neuves-Maisons n° 2"></option>
+							<option value="Raccordement de Pertuis"></option>
+							<option value="Ligne de Metz-Ville à Château-Salins"></option>
+							<option value="Raccordement de Charleville-Mézières"></option>
+							<option value="Raccordement de St-Rambert-d'Albon (bifurcation nord)"></option>
+							<option value="Raccordement de Rivecourt-Sud"></option>
+							<option value="Raccordement de Val-Notre-Dame"></option>
+							<option value="Ligne de Barisey-la-Côte à Frenelle-la-Grande-Puzieux"></option>
+							<option value="Raccordement de Serquigny"></option>
+							<option value="Raccordement de Culoz"></option>
+							<option value="Raccordement militaire de Jussy"></option>
+							<option value="Ligne de Belleville à Beaujeu"></option>
+							<option value="Ligne de Compiègne à Roye-Faubourg-St-Gilles"></option>
+							<option value="Raccordement R2N de Redessan-Manduel"></option>
+							<option value="Raccordement R1N de Redessan-Manduel"></option>
+							<option value="Raccordement  Ouest Besançon TGV"></option>
+							<option value="Raccordement des Fontinettes"></option>
+							<option value="Ligne d'Ambérieu à Montalieu-Vercieu"></option>
+							<option value="Raccordement circulaire de Bordeaux-St-Jean"></option>
+							<option value="Raccordement de Rouen-Martainville"></option>
+							<option value="Raccordement de St-Amand-Longpré (LGV)"></option>
+							<option value="Raccordement de Bercy-Nord"></option>
+							<option value="Ligne d'Auteuil-Boulogne à La Râpée (petite ceinture de Paris)"></option>
+							<option value="Ligne d'Ossès-St-Martin-d'Arrossa à St-Étienne-de-Baïgorry"></option>
+							<option value="Ligne de Langon à Gabarret"></option>
+							<option value="Raccordement de Courtalain (LGV)"></option>
+							<option value="Raccordement d'Achères Voie 2A"></option>
+							<option value="Saut-de-mouton de St-Denis"></option>
+							<option value="Ligne de Châteauroux à La Ville-Gozet"></option>
+							<option value="Ligne de La Loupe à Prey"></option>
+							<option value="Saut-de-mouton de Chaudenay"></option>
+							<option value="Raccordement de Sucy-Bonneuil n° 3"></option>
+							<option value="Raccordement de St-Florentin"></option>
+							<option value="Ligne de St-Étienne-La Terrasse à St-Étienne-Pont-de-l'Âne"></option>
+							<option value="Raccordement des lignes de Nevers à Chagny et de Chagny à Dole"></option>
+							<option value="Raccordement d'Épône"></option>
+							<option value="Raccordement nord de Fréthun"></option>
+							<option value="Ligne de Laon au Cateau"></option>
+							<option value="Raccordement sud de Bollène-Lamotte-du-Rhône"></option>
+							<option value="Raccordement direct de Nantes"></option>
+							<option value="Raccordement de Bonnaous à Beyreman"></option>
+							<option value="Raccordement d'Hattencourt"></option>
+							<option value="Raccordement de Redon"></option>
+							<option value="Raccordement de Bezons"></option>
+							<option value="Raccordement de Lamotte-Brebière"></option>
+							<option value="Ligne de Quimper à Pont-l'Abbé"></option>
+							<option value="Raccordement de Paris-Tolbiac"></option>
+							<option value="Raccordement de Hausbergen à Strasbourg-Cronenbourg Voie H"></option>
+							<option value="Raccordement de Folligny-Ouest"></option>
+							<option value="Raccordement de Mâcon-Nord"></option>
+							<option value="Ligne de Breteuil-Embranchement à Breteuil-Ville"></option>
+							<option value="Ligne de Livron à La Voulte"></option>
+							<option value="Raccordement de Sous-le-Bois"></option>
+							<option value="Raccordement d'Ocquerre"></option>
+							<option value="Raccordement 2J des Ambassadeurs"></option>
+							<option value="Raccordement d'Orléans vers Tours"></option>
+							<option value="Raccordement de Noisy-le-Sec-Nord"></option>
+							<option value="Raccordement de St-Jory-Triage à Capdenac"></option>
+							<option value="Raccordement de l'Europe"></option>
+							<option value="Voie-mère de l'embranchement particulier de la ZI d'Ambérieu"></option>
+							<option value="Voie-mère de Lens"></option>
+							<option value="Ligne de Colombiers à Cazouls-lès-Béziers"></option>
+							<option value="Raccordement d'Auneau (LGV)"></option>
+							<option value="Ligne d'Orange à L'Isle-Fontaine-de-Vaucluse"></option>
+							<option value="Raccordement de Bercy-Sud"></option>
+							<option value="Ligne de Cluny à Chalon-sur-Saône"></option>
+							<option value="Raccordement 2R des Ambassadeurs"></option>
+						</datalist>
+						<button id="btnAddLine" type="button">➕ Ajouter la ligne</button>
+						<button id="btnEmptyLinesList" type="button">❌ Vider la liste</button>
+					</div>
+					<span>Lignes séléctionnées : </span>
+					<span class="inputInfo">Vous pouvez retirer des lignes en cliquant sur le bouton à droite de la ligne. Vous pouvez également basculer le mode de sélection : Sélectionner toute la ligne/Sélectionner la partie de la ligne à l'intérieur de la zone sélectionné</span>
+					<div id="selectedLinesList">
+						
+					</div>
+					
+					<p id="nbSegmentsSelection"></p>
+					<div id="previewLines">
+					</div>
+					<div id="lineTooltip" class="hidden"></div>
+				</div>
+
+
+				<!-- ========== STEP 3 ========== -->
+				<div class="formStep">
+					<h3>3. Propriétés voies <span class="stepCompletion" data-completion="">...</span></h3>
+					<div class="tabContainer" data-associated-id="trackRule">
+						Régle de voie : 
+						<div class="tab active" data-tab-index="0" tabindex="0">
+							Par défaut
+						</div>
+						<div class="tab" data-tab-index="1" tabindex="0">
+							Avancé
+						</div>
+					</div>
+					<div class="tabContent" id="trackRule">
+						<div class="tabContentContainer" id="trackRuleDefault">
+							<div>
+								Règle de voie par défaut du <a href="#modelSelection" class="linkToModelSelection">modèle</a>
+							</div>
+						</div>
+						<div class="tabContentContainer hidden" id="trackRuleAdvanced" aria-hidden="true">
+							<div>
+								<div class="inputGroup">
+									<label for="ProviderTrackRule"> Fournisseur :</label>
+									<div class="inputCont">
+										<input type="text" id="ProviderTrackRule" name="ProviderTrackRule" size="10" placeholder="Kuju" oninput="validationFn()" disabled>
+									</div>
+								</div>
+								<div class="inputGroup">
+									<label for="ProductTrackRule"> Produit :</label>
+									<div class="inputCont">
+										<input type="text" id="ProductTrackRule" name="ProductTrackRule" size="10" placeholder="RailsimulatorUS" oninput="validationFn()" disabled>
+									</div>
+								</div>
+								<div class="inputGroup">
+									<label for="FileTrackRule"> Fichier :</label>
+									<div class="inputCont">
+										<input type="text" id="FileTrackRule" name="trackRule" size="100" placeholder="RailNetwork\TrackRules\SanB_Bars_Mainline.xml" oninput="validationFn()" disabled>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tabContainer" data-associated-id="trackModel">
+						Voie : 
+						<div class="tab active" data-tab-index="0" tabindex="0">
+							Par défaut
+						</div>
+						<div class="tab" data-tab-index="1" tabindex="0">
+							Avancé
+						</div>
+					</div>
+					<div class="tabContent" id="trackModel">
+						<div class="tabContentContainer" id="trackModelDefault">
+							<div>
+								Voie par défaut du <a href="#modelSelection" class="linkToModelSelection">modèle</a>
+							</div>
+						</div>
+						<div class="tabContentContainer hidden" id="trackModelAdvanced" aria-hidden="true">
+							<div>
+								<div class="inputGroup">
+									<label for="ProviderTrack"> Fournisseur :</label>
+									<div class="inputCont">
+										<input type="text" id="ProviderTrack" name="ProviderTrack" size="10" placeholder="Kuju" oninput="validationFn()" disabled>
+									</div>
+								</div>
+								<div class="inputGroup">
+									<label for="ProductTrack"> Produit :</label>
+									<div class="inputCont">
+										<input type="text" id="ProductTrack" name="ProductTrack" size="10" placeholder="RailsimulatorUS" oninput="validationFn()" disabled>
+									</div>
+								</div>
+								<div class="inputGroup">
+									<label for="track"> Fichier :</label>
+									<div class="inputCont">
+										<input type="text" id="track" name="track" size="100" placeholder="RailNetwork\Track\SanB_Bars_track01.xml" oninput="validationFn()" disabled>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<table id="linesPropretiesTable">
+						<tbody>
+							<tr id="linesPropsRowLineName">
+								<th></th>
+								<th>Toutes les lignes</th>
+							</tr>
+							<tr id="linesPropsRowPrimSpeed">
+								<th><label for="limiteVitessePrim">Limite de vitesse primaire</label></th>
+								<td>
+									<div class="inputCont">
+										<input type="number" min="5" max="5000" step="1" title="Un nombre entier compris entre 5 et 5000 (inclus)" id="limiteVitessePrim" name="limiteVitessePrim" oninput="validationFn()" required="">km/h
+									</div>
+									<button type="button" id="applyToAllLinesLimiteVitessePrim" title="Appliquer cette valeur pour toutes les lignes"><img src="./pictures/applyToAll.svg" alt=""></button>
+								</td>
+							</tr>
+							<tr id="linesPropsRowSecondSpeed">
+								<th><label for="limiteVitesseSecon">Limite de vitesse secondaire</label></th>
+								<td>
+									<div class="inputCont">
+										<input type="number" min="5" max="5000" step="1" title="Un nombre entier compris entre 5 et 5000 (inclus)" id="limiteVitesseSecon" name="limiteVitesseSecon" oninput="validationFn()" required="">km/h
+									</div>
+									<button type="button" id="applyToAllLinesLimiteVitesseSecon" title="Appliquer cette valeur pour toutes les lignes"><img src="./pictures/applyToAll.svg" alt=""></button>
+								</td>
+							</tr>
+							<tr id="linesPropsRowElectri">
+								<th><label for="electrification">Électrification</label></th>
+								<td>
+									<div class="inputCont">
+										<select id="electrification" name="electrification" oninput="validationFn()" required="">
+											<option value="no">Non électrifié</option>
+											<option value="Caténaire">Caténaire</option>
+											<option value="TroisRail">Troisième rail</option>
+										</select>
+									</div>
+									<button type="button" id="applyToAllLinesElectrification" title="Appliquer cette valeur pour toutes les lignes"><img src="./pictures/applyToAll.svg" alt=""></button>
+								</td>
+							</tr>
+							<tr id="linesPropsRowQuality">
+								<th><label for="qualiteVoie">Qualité de la voie</label></th>
+								<td>
+									<div class="inputCont">
+										<input type="number" min="0" max="100" step="1" id="qualiteVoie" name="qualiteVoie" placeholder="100" oninput="validationFn()">%
+									</div>
+									<button type="button" id="applyToAllLinesQualiteVoie" title="Appliquer cette valeur pour toutes les lignes"><img src="./pictures/applyToAll.svg" alt=""></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+
+			<div id="formNav">
+				<button type="button" id="prevStepBtn" disabled>← Précédent</button>
+				<button type="button" id="nextStepBtn">Suivant →</button>
+			</div>
+			<div id="errorsDisplay">
+				<details>
+					<summary><h3>Erreurs</h3></summary>
+					<div id="errorsCont">
+					</div>
+				</details>
+			</div>
+			<button id="submitBtn" type="button" disabled>→ Valider</button>
+		</form>
+
+		<h2>Installation</h2>
+		<p>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur natus id esse corrupti laborum voluptatum consequatur. Rem harum ratione veritatis enim quos aliquam saepe accusamus officiis, dicta mollitia tempora cumque?
+			Eveniet vero at assumenda molestias. Reprehenderit nesciunt cumque sequi nobis! Voluptate dolores sit dolor aliquid suscipit voluptatibus consectetur dolore explicabo autem, numquam, enim nesciunt debitis similique saepe nihil dolorum veritatis!
+			Voluptates officia ratione laudantium sunt accusamus harum. Repellat exercitationem laborum porro rem qui labore voluptates vitae deserunt sed nemo amet, reiciendis eaque fuga explicabo obcaecati voluptatem laudantium, nostrum totam iste.
+			Incidunt hic amet voluptatum optio nulla velit nihil est! Voluptate asperiores impedit consequatur voluptatibus esse fugiat mollitia dolorem quas quisquam ea. Aliquid, doloribus voluptatibus quam dolores ducimus possimus amet ut?
+			Sequi voluptate architecto repellat voluptas enim iusto voluptatibus ipsum commodi vel esse. Voluptas exercitationem eum, praesentium minima nulla cupiditate assumenda accusamus voluptatibus, a molestiae debitis provident beatae tempore laboriosam esse?
+		</p>
+
+		<h2>Outils utilisés</h2>
+		<p>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur natus id esse corrupti laborum voluptatum consequatur. Rem harum ratione veritatis enim quos aliquam saepe accusamus officiis, dicta mollitia tempora cumque?
+			Eveniet vero at assumenda molestias. Reprehenderit nesciunt cumque sequi nobis! Voluptate dolores sit dolor aliquid suscipit voluptatibus consectetur dolore explicabo autem, numquam, enim nesciunt debitis similique saepe nihil dolorum veritatis!
+			Voluptates officia ratione laudantium sunt accusamus harum. Repellat exercitationem laborum porro rem qui labore voluptates vitae deserunt sed nemo amet, reiciendis eaque fuga explicabo obcaecati voluptatem laudantium, nostrum totam iste.
+			Incidunt hic amet voluptatum optio nulla velit nihil est! Voluptate asperiores impedit consequatur voluptatibus esse fugiat mollitia dolorem quas quisquam ea. Aliquid, doloribus voluptatibus quam dolores ducimus possimus amet ut?
+			Sequi voluptate architecto repellat voluptas enim iusto voluptatibus ipsum commodi vel esse. Voluptas exercitationem eum, praesentium minima nulla cupiditate assumenda accusamus voluptatibus, a molestiae debitis provident beatae tempore laboriosam esse?
+		</p>
+	</main>
+	<footer>
+
+	</footer>
+	<script>
+		document.getElementById("submitBtn").addEventListener("click", function() {
+			
+		});
+
+		let currentStep = 0;
+		let oldStep = 0;
+		let stepsCont = document.getElementsByClassName("formStep");
+		document.getElementById("prevStepBtn").addEventListener("click", function() {
+			if (currentStep > 0) {
+				currentStep--;
+				gotoStep(currentStep);
+			}
+		});
+		document.getElementById("nextStepBtn").addEventListener("click", function() {
+			let stepsCont = document.getElementsByClassName("formStep");
+			if (currentStep < stepsCont.length) {
+				currentStep++;
+				gotoStep(currentStep);
+			}
+		});
+
+		document.getElementById("summStepOne").parentElement.addEventListener("click", function() {
+			currentStep = 0;
+			gotoStep(currentStep);
+		});
+		document.getElementById("summStepTwo").parentElement.addEventListener("click", function() {
+			currentStep = 1;
+			gotoStep(currentStep);
+		});
+		document.getElementById("summStepThree").parentElement.addEventListener("click", function() {
+			currentStep = 2;
+			gotoStep(currentStep);
+		});
+
+		function gotoStep(step) {
+			for (let i = 0; i < stepsCont.length; i++) {
+				if (i == step) {
+					stepsCont[i].classList.add("current");
+					if (oldStep < currentStep)
+						stepsCont[i].setAttribute("direction", "next");
+					else if (oldStep > currentStep)
+						stepsCont[i].setAttribute("direction", "prev");
+					stepsCont[i].removeAttribute("aria-hidden");
+				} else {
+					stepsCont[i].classList.remove("current");
+					stepsCont[i].setAttribute("aria-hidden", true);
+					if (i == oldStep && oldStep < currentStep) {
+						stepsCont[i].classList.add("oldPrevious");
+						setTimeout(function() {
+							stepsCont[i].classList.remove("oldPrevious");
+						}, 500);
+					} else if (i == oldStep && oldStep > currentStep) {
+						stepsCont[i].classList.add("oldNext");
+						setTimeout(function() {
+							stepsCont[i].classList.remove("oldNext");
+						}, 500);
+					}
+				}
+			}
+			document.getElementById("stepsCont").scrollIntoView();
+			document.getElementById("prevStepBtn").disabled = (step == 0);
+			document.getElementById("nextStepBtn").disabled = (step == stepsCont.length - 1);
+			
+			updateStepThreeTable();
+
+			oldStep = currentStep;
+		}
+
+		let tabContainers = document.getElementsByClassName("tabContainer");
+		for(let i = 0; i < tabContainers.length; i++) {
+			let tabContainer = tabContainers[i];
+			let tabContainerContentId = document.getElementById(tabContainer.getAttribute("data-associated-id")).id;
+			let tabs = tabContainer.getElementsByClassName("tab")
+			for (let j = 0; j < tabs.length; j++) {
+				let tab = tabs[j];
+				let tabContentIndex = tab.getAttribute("data-tab-index");
+				tab.addEventListener("click", function() {
+					tabHandler(tabContainer, tabContainerContentId, tabContentIndex, tabs)
+				});
+				tab.addEventListener("keydown", function() {
+					if (event.keyCode === 13)
+						tabHandler(tabContainer, tabContainerContentId, tabContentIndex, tabs)
+				});
+			};
+		};
+
+		function tabHandler(tabContainer, tabContainerContentId, tabContentIndex, tabs) {
+			let tabContainers = document.getElementById(tabContainerContentId).getElementsByClassName("tabContentContainer");
+			for (let i = 0; i < tabContainers.length; i++) {
+				if (i == tabContentIndex) {
+					tabContainers[i].classList.remove("hidden");
+					tabContainers[i].removeAttribute("aria-hidden");
+					let tabInputs = tabContainers[i].getElementsByTagName("input");
+					for (let k = 0; k < tabInputs.length; k++) {
+						tabInputs[k].disabled = false;
+						tabInputs[k].required = true;
+					}
+					let tabLinks = tabContainers[i].getElementsByTagName("a");
+					for (let k = 0; k < tabLinks.length; k++) {
+						tabLinks[k].removeAttribute("tabIndex");
+					}
+				} else {
+					tabContainers[i].classList.add("hidden");
+					tabContainers[i].setAttribute("aria-hidden", true);
+					let tabInputs = tabContainers[i].getElementsByTagName("input");
+					for (let k = 0; k < tabInputs.length; k++) {
+						tabInputs[k].disabled = true;
+						tabInputs[k].required = false;
+					}
+					let tabLinks = tabContainers[i].getElementsByTagName("a");
+					for (let k = 0; k < tabLinks.length; k++) {
+						tabLinks[k].tabIndex = -1;
+					}
+				}
+			}
+			for (let i = 0; i < tabs.length; i++) {
+				if (i == tabContentIndex) {
+					tabs[i].classList.add("active");
+				} else {
+					tabs[i].classList.remove("active");
+				}
+			}
+
+			validationFn();
+		}
+
+		let coordFormClick;
+		let mapFrance = document.getElementById("mapFrance");
+		mapFrance.addEventListener("click", function(event) {
+			coordFormClick = getCoordFromClick(event);
+		});
+
+		document.getElementById("locPickPoint1").addEventListener("click", function() {
+			document.getElementById("selectionStepContentZone").classList.add("pickerActive");
+			coordFormClick = null;
+			var intr = setInterval(function() {
+				if (coordFormClick != null) {
+					clearInterval(intr);
+					document.getElementById("latTop").value = coordFormClick.lat;
+					document.getElementById("lonLeft").value = coordFormClick.lon;
+					resetLines();
+					actualiseZoneValues();
+					document.getElementById("selectionStepContentZone").classList.remove("pickerActive");
+					validationFn();
+				}
+			}, 100)
+		});
+		document.getElementById("locPickPoint2").addEventListener("click", function() {
+			document.getElementById("selectionStepContentZone").classList.add("pickerActive");
+			coordFormClick = null;
+			var intr = setInterval(function() {
+				if (coordFormClick != null) {
+					clearInterval(intr);
+					document.getElementById("latBottom").value = coordFormClick.lat;
+					document.getElementById("lonRight").value = coordFormClick.lon;
+					resetLines();
+					actualiseZoneValues();
+					document.getElementById("selectionStepContentZone").classList.remove("pickerActive");
+					validationFn();
+				}
+			}, 100)
+		});
+
+		function getCoordFromClick(event) {
+			let posX = (event.clientX - mapFrance.getBoundingClientRect().left) / mapFrance.offsetWidth;
+			let posY = 1 - (event.clientY - mapFrance.getBoundingClientRect().top) / mapFrance.offsetHeight;
+			let lon = Number(posX * 14 - 5.5).toFixed(6);
+			let lat = Number(posY * 10.5 + 41.5).toFixed(6);
+			return {lat: lat, lon: lon};
+		}
+		
+		document.getElementById("line").addEventListener("keypress", function(event) {
+			if (event.keyCode === 13) {
+				addLine(lineInput.value.trim());
+				generatePreview();
+			}
+		});
+		document.getElementById("btnAddLine").addEventListener("click", function() {
+			addLine(lineInput.value.trim());
+			generatePreview();
+		});
+
+		document.getElementById("btnEmptyLinesList").addEventListener("click", function() {
+			if (confirm("Voulez-vous vraiment vider la liste des lignes sélectionnées ?")) {
+				document.getElementById("selectedLinesList").innerHTML = "";
+				selectedLines = {};
+				updateStepThreeTable();
+				generatePreview();
+			}
+		});
+
+		let lineInput = document.getElementById("line");
+		let selectedLines = {};
+		function addLine(lineName, progMode = false) {
+			if (lineName == "") {
+				if (!progMode)
+					alert("Veuillez entrer un nom de ligne.");
+				return;
+			}
+			let lineExists = false;
+			let listLines = document.getElementById("listLines").getElementsByTagName("option");
+			for (let i = 0; i < listLines.length; i++) {
+				if (listLines[i].value == lineName) {
+					lineExists = true;
+					break;
+				}
+			}
+
+			if (!lineExists) {
+				if (!progMode)
+					alert("La ligne n'existe pas.");
+			} else {
+				let existingLines = document.getElementById("selectedLinesList").getElementsByClassName("linesListItem");
+				let lineAlreadySelected = false;
+				for (let i = 0; i < existingLines.length; i++) {
+					if (existingLines[i].getElementsByTagName("span")[0].innerText == lineName) {
+						if (!progMode) {
+							alert("La ligne est déjà sélectionnée.");
+							existingLines[i].getElementsByTagName("span")[0].scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+							setTimeout(() => {
+								existingLines[i].getElementsByClassName('toggleLineMode')[0].focus();
+							}, 1000);
+						}
+						lineAlreadySelected = true;
+						return;
+					}
+				}
+				if (!lineAlreadySelected) {
+					let lineListItem = document.createElement("div");
+					lineListItem.classList.add("linesListItem");
+					lineListItem.innerHTML = `<span>${lineName}</span><div class="linesListActions"><button class='toggleLineMode' type='button' onclick='toogleLineMods(this);' data-outside="false" title="Passer au mode 'Ligne entière'"><img src="./pictures/selectInside.svg" alt=""></button><button class='removeLineBtn' type='button' onclick='removeLine(this);'>❌</button></div>`;
+					document.getElementById("selectedLinesList").appendChild(lineListItem);
+					if (!progMode) {
+						selectedLines[lineName] = {"outside": true, "propreties" : {"primSpeed": null, "secondSpeed": null, "elec": null, "quality": null}};
+						lineListItem.getElementsByClassName('toggleLineMode')[0].getElementsByTagName('img')[0].src = "./pictures/selectWhole.svg";
+						lineListItem.getElementsByClassName('toggleLineMode')[0].setAttribute("data-outside", true);
+						lineListItem.getElementsByClassName('toggleLineMode')[0].title = "Passer au mode 'Uniquement dans la zone'";
+					}
+					selectedLines[lineName] = {"outside": false, "propreties" : {"primSpeed": null, "secondSpeed": null, "elec": null, "quality": null}};
+					lineInput.value= "";
+
+					updateStepThreeTable();
+				}
+			}
+		}
+
+		let timeoutRequTooglePreview;
+		function toogleLineMods(button) {
+			let lineMode = button.getAttribute("data-outside")
+			let lineName = button.parentElement.previousElementSibling.textContent;
+			if (lineMode == "false") {
+				selectedLines[lineName]["outside"] = true;
+				button.getElementsByTagName('img')[0].src = "./pictures/selectWhole.svg";
+				button.setAttribute("data-outside", "true");
+				button.title = "Passer au mode 'Uniquement dans la zone'";
+			} else {
+				selectedLines[lineName]["outside"] = false;
+				button.getElementsByTagName('img')[0].src = "./pictures/selectInside.svg";
+				button.setAttribute("data-outside", "false");
+				button.title = "Passer au mode 'Ligne entière'";
+			}
+
+			if (timeoutRequTooglePreview != undefined)
+				clearTimeout(timeoutRequTooglePreview);
+			timeoutRequTooglePreview = setTimeout(function() {
+				updateStepThreeTable();
+				validationFn();
+			}, 1000);
+		}
+
+		let timeoutRequPreview;
+		function removeLine(button) {
+			let lineName = button.parentElement.previousElementSibling.textContent;
+			delete selectedLines[lineName];
+			button.parentElement.parentElement.remove();
+
+			if (timeoutRequPreview != undefined)
+				clearTimeout(timeoutRequPreview);
+			timeoutRequPreview = setTimeout(function() {
+				updateStepThreeTable();
+				validationFn();
+			}, 1000);
+		}
+
+		function updateStepThreeTable() {
+			let oldDatas = document.getElementById('linesPropretiesTable').querySelectorAll("[data-dynamic]");
+			oldDatas.forEach(dataCell => {
+				dataCell.remove();
+			});
+
+			let counter = 0;
+			let linesToDisplay = selectedLines;
+
+			for (const line in linesToDisplay) {
+				let lineNameCell = document.createElement("th");
+				lineNameCell.setAttribute("data-dynamic", "");
+				lineNameCell.innerText = line;
+				document.getElementById("linesPropsRowLineName").appendChild(lineNameCell);
+
+				let primSpeedCell = document.createElement("td");
+				primSpeedCell.setAttribute("data-dynamic", "");
+				primSpeedCell.innerHTML = `<div class="inputCont"><input type="number" min="5" max="5000" step="1" title="Un nombre entier compris entre 5 et 5000 (inclus)" id="limiteVitessePrim-${counter}" name="limiteVitessePrim" oninput="validationFn()" required="">km/h</div>`;
+				primSpeedCell.addEventListener("input", function(e) {
+					updateLinePropreties("primSpeed", parseInt(e.target.id.split("-")[1]), e.target.value);
+				});
+				document.getElementById("linesPropsRowPrimSpeed").appendChild(primSpeedCell);
+
+				let secondSpeedCell = document.createElement("td");
+				secondSpeedCell.setAttribute("data-dynamic", "");
+				secondSpeedCell.innerHTML = `<div class="inputCont"><input type="number" min="5" max="5000" step="1" title="Un nombre entier compris entre 5 et 5000 (inclus)" id="limiteVitesseSecon-${counter}" name="limiteVitesseSecon" oninput="validationFn()" required="">km/h</div>`;
+				secondSpeedCell.addEventListener("input", function(e) {
+					updateLinePropreties("secondSpeed", parseInt(e.target.id.split("-")[1]), e.target.value);
+				});
+				document.getElementById("linesPropsRowSecondSpeed").appendChild(secondSpeedCell);
+
+				let electrificationCell = document.createElement("td");
+				electrificationCell.setAttribute("data-dynamic", "");
+				electrificationCell.innerHTML = `<div class="inputCont"><select id="electrification-${counter}" name="electrification" oninput="validationFn()" required=""><option value="no">Non électrifié</option><option value="Caténaire">Caténaire</option><option value="TroisRail">Troisième rail</option></select></div>`;
+				electrificationCell.addEventListener("input", function(e) {
+					updateLinePropreties("elec", parseInt(e.target.id.split("-")[1]), e.target.value);
+				});
+				document.getElementById("linesPropsRowElectri").appendChild(electrificationCell);
+
+				let qualityCell = document.createElement("td");
+				qualityCell.setAttribute("data-dynamic", "");
+				qualityCell.innerHTML = `<div class="inputCont"><input type="number" min="0" max="100" step="1" id="qualiteVoie-${counter}" name="qualiteVoie" placeholder="100" oninput="validationFn()">%</div>`;
+				qualityCell.addEventListener("input", function(e) {
+					updateLinePropreties("quality", parseInt(e.target.id.split("-")[1]), e.target.value);
+				});
+				document.getElementById("linesPropsRowQuality").appendChild(qualityCell);
+
+				counter++;
+			}
+		}
+
+		function updateLinePropreties(propType, lineIndex, propValue) {
+			let lineName = document.getElementById("linesPropsRowLineName").getElementsByTagName("th")[lineIndex+2].innerText;
+			selectedLines[lineName]["propreties"][propType] = propValue;
+		}
+
+		function updateStepThreeTableValues() {
+			let datasRows = document.getElementById('linesPropretiesTable').getElementsByTagName("tr");
+			datasRows = Array.from(datasRows).slice(1);
+			datasRows.forEach(function(row) {
+				let cells = row.getElementsByTagName("td");
+				allLinesCell = cells[0];
+				lineSpecificCells = Array.from(cells).slice(1);
+				let isSelectInput = allLinesCell.getElementsByTagName("select")[0] != undefined;
+				let difference = false;
+				let allLinesInput;
+				for (let cell = 0; cell < lineSpecificCells.length; cell++) {
+					let cellInput;
+					if (!isSelectInput) {
+						allLinesInput = allLinesCell.getElementsByTagName("input")[0];
+						cellInput = lineSpecificCells[cell].getElementsByTagName("input")[0];
+						cellInput.placeholder = allLinesInput.value.trim() != "" ? allLinesInput.value : allLinesInput.placeholder;
+					} else if (isSelectInput) {
+						allLinesInput = allLinesCell.getElementsByTagName("select")[0];
+						cellInput = lineSpecificCells[cell].getElementsByTagName("select")[0];
+					}
+					if (cellInput.value != "" && cellInput.value != allLinesInput.value && allLinesInput.value != "") {
+						cellInput.classList.add("different");
+					} else {
+						cellInput.classList.remove("different");
+					}
+				}
+			});
+		}
+
+		document.getElementById("applyToAllLinesLimiteVitessePrim").addEventListener("click", function() {
+			let allLinesValue = document.getElementById("limiteVitessePrim").value;
+			let allLinesCells = document.getElementById('linesPropretiesTable').querySelectorAll("tr:nth-child(2) td[data-dynamic] input");
+			allLinesCells.forEach(function(cell) {
+				cell.value = allLinesValue;
+				cell.classList.remove("different");
+			});
+		});
+		document.getElementById("applyToAllLinesLimiteVitesseSecon").addEventListener("click", function() {
+			let allLinesValue = document.getElementById("limiteVitesseSecon").value;
+			let allLinesCells = document.getElementById('linesPropretiesTable').querySelectorAll("tr:nth-child(3) td[data-dynamic] input");
+			allLinesCells.forEach(function(cell) {
+				cell.value = allLinesValue;
+				cell.classList.remove("different");
+			});
+		});
+		document.getElementById("applyToAllLinesElectrification").addEventListener("click", function() {
+			let allLinesValue = document.getElementById("electrification").value;
+			let allLinesCells = document.getElementById('linesPropretiesTable').querySelectorAll("tr:nth-child(4) td[data-dynamic] select");
+			allLinesCells.forEach(function(cell) {
+				cell.value = allLinesValue;
+				cell.classList.remove("different");
+			});
+		});
+		document.getElementById("applyToAllLinesQualiteVoie").addEventListener("click", function() {
+			let allLinesValue = document.getElementById("qualiteVoie").value;
+			let allLinesCells = document.getElementById('linesPropretiesTable').querySelectorAll("tr:nth-child(5) td[data-dynamic] input");
+			allLinesCells.forEach(function(cell) {
+				cell.value = allLinesValue;
+				cell.classList.remove("different");
+			});
+		});
+
+		let oldLatTop = -10;
+		let oldLonLeft = -10;
+		let oldLatBottom = -10;
+		let oldLonRight = -10;
+		var timeoutRequest = null;
+		function validationFn() {
+			let invalidInputIds = [];
+			let invalidInputReasons = [];
+
+			// STEP 1
+			let stepOneValid = true;
+			if (!document.getElementById("routeName").validity.valid) {
+				stepOneValid = false;
+				invalidInputIds.push("routeName");
+				invalidInputReasons.push("Veuillez entrer un nom pour l'itinéraire.")
+			}
+			if (!document.getElementById("latStart").validity.valid) {
+				stepOneValid = false;
+				invalidInputIds.push("latStart");
+				invalidInputReasons.push("Veuillez entrez une latitude de départ valide.")
+			}
+			if (!document.getElementById("lonStart").validity.valid) {
+				stepOneValid = false;
+				invalidInputIds.push("lonStart");
+				invalidInputReasons.push("Veuillez entrez une longitude de départ valide.")
+			}
+
+
+			// STEP 2
+			let stepTwoValid = true;
+
+			document.getElementById("nbSegmentsSelection").innerText = "Nombre de segments : ...";
+			let zoneEmpty = document.getElementById("latTop").value == "" && document.getElementById("lonLeft").value == "" && document.getElementById("latBottom").value == "" && document.getElementById("lonRight").value == "";
+			if (!zoneEmpty) {
+				let resultAnalyse = actualiseZoneValues();
+				if (resultAnalyse.posTwoPoints == "error") {
+					stepTwoValid = false;
+					invalidInputIds.push("latTop");
+					invalidInputReasons.push("Veuillez vérifier les coordonnées des points de la zone.")
+				} else {
+					if (timeoutRequest != null)
+						clearTimeout(timeoutRequest);
+					timeoutRequest = setTimeout(function() {
+						let segmentsRequestZone = new XMLHttpRequest();
+						segmentsRequestZone.open("GET", `./api.php?segmentsZone=true&latTop=${latTop}&lonLeft=${lonLeft}&latBottom=${latBottom}&lonRight=${lonRight}`);
+						segmentsRequestZone.onreadystatechange = function() {
+							if (segmentsRequestZone.readyState === 4 && segmentsRequestZone.status === 200) {
+								jsonResponse = JSON.parse(segmentsRequestZone.responseText);
+								document.getElementById("nbSegmentsSelection").innerText = "Nombre de segments : " + jsonResponse["nbResults"];
+								distanceLines = jsonResponse["linesSum"];
+
+								// Trie des lignes par longueur
+								jsonResponse["uniqueLines"].sort(function(a, b) {
+									return distanceLines[b] - distanceLines[a];
+								});
+
+								if (oldLatTop != document.getElementById("latTop").value && oldLonLeft != document.getElementById("lonLeft").value && oldLatBottom != document.getElementById("latBottom").value && oldLonRight != document.getElementById("lonRight").value) {
+									jsonResponse["uniqueLines"].forEach(function(line) {
+										addLine(line, true);
+									});
+									oldLatTop = document.getElementById("latTop").value;
+									oldLonLeft = document.getElementById("lonLeft").value;
+									oldLatBottom = document.getElementById("latBottom").value;
+									oldLonRight = document.getElementById("lonRight").value;
+								}
+							}
+						}
+						segmentsRequestZone.send();
+
+						generatePreview();
+					}, 2000);
+				}
+				if (resultAnalyse.latStart == "error") {
+					stepOneValid = false;
+					invalidInputIds.push("latStart-2");
+					invalidInputReasons.push("La latitude de départ doit être comprise dans la zone sélectionné à l'étape 2.")
+				}
+				if (resultAnalyse.lonStart == "error") {
+					stepOneValid = false;
+					invalidInputIds.push("lonStart-2");
+					invalidInputReasons.push("La longitude de départ doit être comprise dans la zone sélectionné à l'étape 2.")
+				}
+			} else if (zoneEmpty) {
+				if (Object.keys(selectedLines).length == 0) {
+					stepTwoValid = false;
+					invalidInputIds.push("line");
+					invalidInputReasons.push("Veuillez sélectionner au moins une ligne, ou ajuster la zone de sélection.");
+				} else {
+					if (timeoutRequest != null)
+						clearTimeout(timeoutRequest);
+					timeoutRequest = setTimeout(function() {
+						let linesString = Object.keys(selectedLines).join(",");
+						linesString = encodeURI(linesString);
+						console.log(linesString);
+						let segmentsRequestLine = new XMLHttpRequest();
+						segmentsRequestLine.open("GET", `./api.php?segmentsLines=true&lines=${linesString}`);
+						segmentsRequestLine.onreadystatechange = function() {
+							if (segmentsRequestLine.readyState === 4 && segmentsRequestLine.status === 200) {;
+								if (Number.isInteger(Number(JSON.parse(segmentsRequestLine.responseText))))
+									document.getElementById("nbSegmentsSelection").innerText = "Nombre de segments : " + JSON.parse(segmentsRequestLine.responseText);
+								else
+									document.getElementById("nbSegmentsSelection").innerText = "Nombre de segments : Erreur lors de la récupération des données. Cela peut se produire si JavaScript est désactivé.";
+							}
+						}
+						segmentsRequestLine.send();
+
+						generatePreview();
+					}, 2000);
+				}
+			} else {
+				stepTwoValid = false;
+				invalidInputIds.push("lineMode");
+				invalidInputReasons.push("Veuillez sélectionner un mode de sélection.")
+			}
+
+			// STEP 3
+			let stepThreeValid = true;
+			updateStepThreeTableValues();
+
+			if (!document.getElementById("trackRuleAdvanced").classList.contains("hidden")) {
+				if (!document.getElementById("ProviderTrackRule").validity.valid) {
+					stepThreeValid = false;
+					invalidInputIds.push("ProviderTrackRule");
+					invalidInputReasons.push("Veuillez entrer un fournisseur pour la règle de voie, ou sélectionnez 'Par défaut'.")
+				}
+				if (!document.getElementById("ProductTrackRule").validity.valid) {
+					stepThreeValid = false;
+					invalidInputIds.push("ProductTrackRule");
+					invalidInputReasons.push("Veuillez entrer un produit pour la règle de voie, ou sélectionnez 'Par défaut'.")
+				}
+				if (!document.getElementById("FileTrackRule").validity.valid) {
+					stepThreeValid = false;
+					invalidInputIds.push("FileTrackRule");
+					invalidInputReasons.push("Veuillez entrer un fichier pour la règle de voie, ou sélectionnez 'Par défaut'.")
+				}
+			}
+			if (!document.getElementById("trackModelAdvanced").classList.contains("hidden")) {
+				if (!document.getElementById("ProviderTrack").validity.valid) {
+					stepThreeValid = false;
+					invalidInputIds.push("ProviderTrack");
+					invalidInputReasons.push("Veuillez entrer un fournisseur pour la voie, ou sélectionnez 'Par défaut'.")
+				}
+				if (!document.getElementById("ProductTrack").validity.valid) {
+					stepThreeValid = false;
+					invalidInputIds.push("ProductTrack");
+					invalidInputReasons.push("Veuillez entrer un produit pour la voie, ou sélectionnez 'Par défaut'.")
+				}
+				if (!document.getElementById("track").validity.valid) {
+					stepThreeValid = false;
+					invalidInputIds.push("track");
+					invalidInputReasons.push("Veuillez entrer un fichier pour la voie, ou sélectionnez 'Par défaut'.")
+				}
+			}
+			
+			if (!document.getElementById("limiteVitessePrim").validity.valid) {
+				stepThreeValid = false;
+				invalidInputIds.push("limiteVitessePrim");
+				invalidInputReasons.push("Veuillez entrer une limite de vitesse primaire valide.")
+			}
+			if (!document.getElementById("limiteVitesseSecon").validity.valid) {
+				stepThreeValid = false;
+				invalidInputIds.push("limiteVitesseSecon");
+				invalidInputReasons.push("Veuillez entrer une limite de vitesse secondaire valide.")
+			}
+			if (!document.getElementById("electrification").validity.valid) {
+				stepThreeValid = false;
+				invalidInputIds.push("electrification");
+				invalidInputReasons.push("Veuillez sélectionner un mode d'électrification.")
+			}
+			if (!document.getElementById("qualiteVoie").validity.valid) {
+				stepThreeValid = false;
+				invalidInputIds.push("qualiteVoie");
+				invalidInputReasons.push("Veuillez entrer une qualité de voie valide.")
+			}
+
+			let errorsCont = document.getElementById("errorsCont");
+			errorsCont.innerHTML = "";
+			if (invalidInputIds.length > 0) {
+				document.getElementById("errorsDisplay").classList.remove("hidden");
+				invalidInputIds.forEach(function(id) {
+					let errorCont = document.createElement("div");
+					errorCont.classList.add("errorCont");
+					let errorLink = document.createElement("a");
+					errorLink.classList.add("errorLink");
+					errorLink.href = "#" + id.split("-")[0];
+					let inputParentElement = document.getElementById(id.split("-")[0]);
+					do {
+						inputParentElement = inputParentElement.parentElement;
+					} while (inputParentElement.getElementsByTagName("label").length == 0);
+
+					errorLink.innerText = inputParentElement.getElementsByTagName("label")[0].innerText;
+
+
+
+					errorLink.addEventListener("click", function() {
+						errorFocus(id.split("-")[0]);
+					});
+					let errorReason = document.createElement("span");
+					errorReason.classList.add("errorReason");
+					errorReason.innerText = " " + invalidInputReasons[invalidInputIds.indexOf(id)];
+					errorCont.appendChild(errorLink);
+					errorCont.appendChild(errorReason);
+					errorsCont.appendChild(errorCont);
+				});
+			} else {
+				document.getElementById("errorsDisplay").classList.add("hidden");
+			}
+
+			let formStepsCompletionState = document.getElementsByClassName("stepCompletion");
+			if (stepOneValid) {
+				formStepsCompletionState[0].setAttribute("data-completion", "complete");
+				formStepsCompletionState[0].innerText = "✓ Complet";
+				document.getElementById("summStepOne").classList.add("valid");
+			}
+			else {
+				formStepsCompletionState[0].setAttribute("data-completion", "incomplete");
+				formStepsCompletionState[0].innerText = "╳ Incomplet";
+				document.getElementById("summStepOne").classList.remove("valid");
+			}
+			if (stepTwoValid) {
+				formStepsCompletionState[1].setAttribute("data-completion", "complete");
+				formStepsCompletionState[1].innerText = "✓ Complet";
+				document.getElementById("summStepTwo").classList.add("valid");
+			}
+			else {
+				formStepsCompletionState[1].setAttribute("data-completion", "incomplete");
+				formStepsCompletionState[1].innerText = "╳ Incomplet";
+				document.getElementById("summStepTwo").classList.remove("valid");
+			}
+			if (stepThreeValid) {
+				formStepsCompletionState[2].setAttribute("data-completion", "complete");
+				formStepsCompletionState[2].innerText = "✓ Complet";
+				document.getElementById("summStepThree").classList.add("valid");
+			}
+			else {
+				formStepsCompletionState[2].setAttribute("data-completion", "incomplete");
+				formStepsCompletionState[2].innerText = "╳ Incomplet";
+				document.getElementById("summStepThree").classList.remove("valid");
+			}
+
+			if (stepOneValid && stepTwoValid && stepThreeValid) {
+				document.getElementById("submitBtn").disabled = false;
+			} else {
+				document.getElementById("submitBtn").disabled = true;
+			}
+		}
+
+		function errorFocus(id) {
+			let stepsCont = document.getElementsByClassName("formStep");
+			for (let i = 0; i < stepsCont.length; i++) {
+				let input = stepsCont[i].querySelector("#" + id);
+				if (input != null) {
+					if (currentStep != i) {
+						currentStep = i;
+						gotoStep(currentStep);
+					}
+					break;
+				}
+			}
+		}
+
+
+		function resetLines() {
+			document.getElementById("selectedLinesList").querySelectorAll(".linesListItem:not(:has([data-outside='true']))").forEach(function(line) {
+				let lineName = line.getElementsByTagName("span")[0].innerText;
+				delete selectedLines[lineName];
+				line.remove();
+			});
+			validationFn();
+		}
+
+		let latTop;
+		let lonLeft;
+		let latBottom;
+		let lonRight;
+		function actualiseZoneValues() {
+			let errors = {"posTwoPoints" : "error", "latStart" : "error", "lonStart": "error"};
+			let latStart = parseFloat(document.getElementById("latStart").value.trim());
+			let lonStart = parseFloat(document.getElementById("lonStart").value.trim());
+			latTop = parseFloat(document.getElementById("latTop").value.trim());
+			lonLeft = parseFloat(document.getElementById("lonLeft").value.trim());
+			latBottom = parseFloat(document.getElementById("latBottom").value.trim());
+			lonRight = parseFloat(document.getElementById("lonRight").value.trim());
+
+			let largeur = (Math.abs(lonLeft - lonRight)*100/14);
+			let hauteur = (Math.abs(latTop - latBottom)*100/10.5);
+			let decalLeft = (Math.abs(-5.5 - lonLeft)*100/14);
+			let decalTop = (Math.abs(52 - latTop)*100/10.5);
+
+			document.getElementById('zone').style.height = hauteur+"%";
+			document.getElementById('zone').style.width = largeur+"%";
+			document.getElementById('zone').style.marginLeft = decalLeft+"%";
+			document.getElementById('zone').style.marginTop = decalTop+"%";
+
+			if (latStart < latTop && latStart > latBottom)
+				errors.latStart = "valid";
+			if (lonStart > lonLeft && lonStart < lonRight)
+				errors.lonStart = "valid";
+			if (latTop <= 52 && latBottom >= 41.5 && lonLeft >= -5.5 && lonRight <= 8.5 &&
+				latTop > latBottom && lonLeft < lonRight) {
+				document.getElementById('erreurMap').innerText = "";
+				errors.posTwoPoints = "valid";
+			} else {
+				let errorMsg = "Erreur";
+				if (latTop < 41.5 || latTop > 52 || latBottom < 41.5 || latBottom > 52 || lonLeft < -5.5 || lonLeft > 8.5 || lonRight < -5.5 || lonRight > 8.5)
+					errorMsg = "Latitude ou longitude hors zone";
+				else if (latTop < latBottom || lonLeft > lonRight)
+					errorMsg = "Point 1 doit être en haut à gauche du point 2";
+				document.getElementById('erreurMap').innerText = errorMsg;
+			}
+			return errors;
+		}
+
+		async function generatePreview() {
+			document.getElementById("previewLines").classList.add("hidden");
+			setTimeout(async function() {
+				document.getElementById("previewLines").innerHTML = "";
+
+				document.getElementById("previewLines").innerHTML = await displayPreview(latTop, lonLeft, latBottom, lonRight, selectedLines);
+				document.getElementById("previewLines").classList.remove("hidden");
+
+				let lineElements = document.getElementById("previewLines").getElementsByTagName("line");
+				let tooltip = document.getElementById("lineTooltip");
+				let tooltipTimeout;
+				for (let i = 0; i < lineElements.length; i++) {
+					lineElements[i].addEventListener("mouseover", function() {
+						tooltip.classList.remove("hidden");
+						if (tooltipTimeout != null)
+							clearTimeout(tooltipTimeout);
+						tooltip.innerText = lineElements[i].getAttribute("data-linename");
+						tooltip.style.left = event.clientX + 10 + "px";
+						tooltip.style.top = event.clientY - 5 + "px";
+
+						tooltipTimeout = setTimeout(function() {
+							tooltip.classList.add("hidden");
+						}, 2000);
+					});
+				}
+			}, 500);
+		}
+
+		async function displayPreview(latTop, lonLeft, latBottom, lonRight, selectedLines) {
+			let responsePreview = await fetch("./previewGenerator.php", {
+				method: "post",
+				headers: {
+					'Accept': 'image/svg+xml',
+					'Content-Type': 'image/svg+xml'
+				},
+
+				//make sure to serialize your JSON body
+				body: JSON.stringify({
+					latTop: (latTop != null) ? latTop : "",
+					lonLeft: (lonLeft != null) ? lonLeft : "",
+					latBottom: (latBottom != null) ? latBottom : "",
+					lonRight: (lonRight != null) ? lonRight : "" ,
+					selectedLines: selectedLines
+				})
+			});
+			return await responsePreview.text();
+		}
+		
+		document.getElementById("submitBtn").addEventListener("click", function() {
+			alert("*Explosions dans tous les sens* Le formulaire a été envoyé ! 😎 *Boom*");
+		});
+		
+
+		validationFn();
+	</script>
+</body>
+</html>
