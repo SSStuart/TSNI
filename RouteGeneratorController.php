@@ -12,7 +12,6 @@ use MathPHP\Number\Complex;
 
 class RouteGeneratorController extends Controller
 {
-	// Test submodule
 	private $routeName;
 	private $latStart;
 	private $lonStart;
@@ -227,7 +226,7 @@ class RouteGeneratorController extends Controller
 			}
 
 			// if (is_nan($angle))
-			// 	logger("⚠ Angle à une valeur NaN. segment #".$key, "ERROR", $segment);
+			// Log::channel('tsni')->error("⚠ Angle à une valeur NaN. segment n° :key . :segment", ["key" => $key, "segment" => $segment])
 
 			$tileCoord = $this->getTileCoordAndSegRelCoord($segment["segDepX"], $segment["segDepZ"]);
 			$tileX = $tileCoord["tileX"];
@@ -258,7 +257,7 @@ class RouteGeneratorController extends Controller
 				$this->rubans[] = ["id" => $rubanId, "GUIDs" => $rubanGUIDs, "tileX" => $tileX, "coordRelX" => $segment["segDepXRel"], "tileZ" => $tileZ, "coordRelZ" => $segment["segDepZRel"], "longueur" => $segment["longueur"], 
 					"arrX" => $segment["segFinX"], "arrZ" => $segment["segFinZ"], "angleFin" => $angleFin, "nomLigne" => $segment["nomLigne"], "pkd" => $segment["pkd"], "pkf" => $segment["pkf"], "numVoie" => $segment["numVoie"],
 					"coordAbsX" => $segment["segDepX"], "coordAbsZ" => $segment["segDepZ"]];
-				// logger("Ruban inséré :", "ERROR", $this->rubans[count($this->rubans) - 1]);
+				// Log::channel('tsni')->info("Ruban inséré : :ruban", ["ruban" => $this->rubans[count($this->rubans) - 1]])
 			}
 
 			$segment2 = ["rubanId" => $rubanId, "rubanGUIDs" => $rubanGUIDs, "sensCourbe" => $segment["sensCourbe"], "rayonCourbe" => $segment["rayonCourbe"], "segDepX" => $segment["segDepX"], "segDepZ" => $segment["segDepZ"], "longueur" => $segment["longueur"], "angle" => $angle, "angleFin" => $angleFin];
@@ -393,7 +392,7 @@ class RouteGeneratorController extends Controller
 
 			$nodesFormated = [];
 			foreach ($this->rubans as $key => $ruban) {
-				// logger("Execution de la boucle foreach ribbon1", "WARN");
+				// Log::channel('tsni')->info("Execution de la boucle foreach ribbon1");
 				$ribPos0 = ["X" => $ruban["tileX"] * 1024 + $ruban["coordRelX"], "Z" => $ruban["tileZ"] * 1024 + $ruban["coordRelZ"]];
 				$ribPos1 = ["X" => $ruban["arrX"], "Z" => $ruban["arrZ"]];
 
@@ -403,14 +402,14 @@ class RouteGeneratorController extends Controller
 						$pos1 = $ribPos0;
 					else
 						$pos1 = $ribPos1;
-					// logger("_Execution de la boucle foreach extremite1 (#{$extremite})", "WARN");
+					// Log::channel('tsni')->info("_Execution de la boucle foreach extremite1 (#:extremite)", ["extremite" => $extremite]);
 					if ($extremitesTraitees[$ruban["id"]][$extremite] === false) {
-						// logger("__Extremite non traitee. 💠Traitement extrémité {$extremite} du ruban {$key}", "WARN");
+						// Log::channel('tsni')->info("__Extremite non traitee. 💠Traitement extrémité :extremite du ruban :key", ["extremite" => $extremite, "key" => $key]);
 						$nodeExtrems[] = ["rubanGUIDs" => $ruban["GUIDs"], "extremPos" => $extremite];
 						$extremitesTraitees[$ruban["id"]][$extremite] = true;
 
 						foreach ($this->rubans as $key2 => $ruban2) {
-							// logger("___Execution de la boucle foreach ribbon2", "WARN");
+							// Log::channel('tsni')->info("___Execution de la boucle foreach ribbon2");
 							$rib2Pos0 = ["X" => $ruban2["tileX"] * 1024 + $ruban2["coordRelX"], "Z" => $ruban2["tileZ"] * 1024 + $ruban2["coordRelZ"]];
 							$rib2Pos1 = ["X" => $ruban2["arrX"], "Z" => $ruban2["arrZ"]];
 
@@ -419,26 +418,26 @@ class RouteGeneratorController extends Controller
 									$pos2 = $rib2Pos0;
 								else
 									$pos2 = $rib2Pos1;
-								// logger("____Execution de la boucle foreach extremite2 (#{$extremite2})", "WARN");
+								// Log::channel('tsni')->info("____Execution de la boucle foreach extremite2 (#:extremite)", ["extremite" => $extremite2]);
 								if ($extremitesTraitees[$ruban2["id"]][$extremite2] === false) {
-									// logger("_____Extremite non traitee", "WARN");
+									// Log::channel('tsni')->info("_____Extremite non traitee");
 									if (sqrt(abs($pos1["X"] - $pos2["X"]) ** 2 + abs($pos1["Z"] - $pos2["Z"]) ** 2) <= 0.001) {
-										// logger("______Distance < 0.001. 💠Traitement extrémité {$extremite2} du ruban {$key2}", "WARN");
+										// Log::channel('tsni')->info("______Distance < 0.001. 💠Traitement extrémité :extremite du ruban :key", ["extremite" => $extremite2, "key" => $key2]);
 										$nodeExtrems[] = ["rubanGUIDs" => $ruban2["GUIDs"], "extremPos" => $extremite2];
 										$extremitesTraitees[$ruban2["id"]][$extremite2] = true;
 									} 
 									// else {
-									// 	logger("_____.. mais distance trop grande", "WARN");
+									// 	Log::channel('tsni')->info("_____.. mais distance trop grande");
 									// }
 								} 
 								// else {
-								// 	logger("_____✅Extremite déjà traitee", "WARN");
+								// 	Log::channel('tsni')->info("_____✅Extremite déjà traitee");
 								// }
 							}
 						}
 					} 
 					// else {
-					// 	logger("__✅Extremite déjà traitee", "WARN");
+					// 	Log::channel('tsni')->info("__✅Extremite déjà traitee");
 					// }
 
 					if (count($nodeExtrems) > 0) {
@@ -455,8 +454,6 @@ class RouteGeneratorController extends Controller
 					"nodes" => $nodesFormated,
 				],
 			];
-
-			// echo json_encode($tracksTemplateData);
 
 			$xml = view('tsni.files.tracks_template', $tracksTemplateData)->render();
 			Storage::put("{$routeDirectory}/Networks/Tracks.xml", $xml);
@@ -560,7 +557,7 @@ class RouteGeneratorController extends Controller
 	}
 
     private function decoupeSegment($segment): array {
-		// logger("Variable segment", "WARN", $segment);
+		// Log::channel('tsni')->info("Variable segment : :segment", ["segment" => $segment]);
 		$longueur = $segment["longueur"];
 		$segDepX = $segment["segDepX"];
 		$segDepZ = $segment["segDepZ"];
@@ -610,7 +607,7 @@ class RouteGeneratorController extends Controller
 				"segDepXAbs" => $segDepX, "segDepZAbs" => $segDepZ ];
 		}
 
-		// logger("Valeurs retournées", "WARN", $coupes);
+		// Log::channel('tsni')->info("Valeurs retournées : :return", ["return" => $coupes]);
 		return $coupes;
 	}
 
