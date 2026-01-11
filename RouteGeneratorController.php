@@ -30,7 +30,7 @@ class RouteGeneratorController extends Controller
 	private $tilesList;
 	private $trackTiles;
 	private $zoneNumber;
-    private $routePropreties;
+    private $routeProperties;
     private $trackData;
 	private $S;
 
@@ -89,8 +89,13 @@ class RouteGeneratorController extends Controller
 								->orWhere('IDGAIA', 'd161f5aa-4e53-11ea-98ff-014c64e0362d')
 								->orWhere('IDGAIA', 'd161f71a-4e53-11ea-98ff-014c64e0362d')
 								->orWhere('IDGAIA', 'd161f880-4e53-11ea-98ff-014c64e0362d')
+								->orWhere('IDGAIA', 'd161f9fe-4e53-11ea-98ff-014c64e0362d')
 								->orderBy('nomLigne')->orderBy('nomVoie')->orderBy('pkd')
 								->get();
+		// $segments = LineSegment::where('Xd', '>=', 2.429987)->where('Xd', '<=', 2.483556)
+		// 						->where('Zd', '>=', 48.885161)->where('Zd', '<=', 48.909209)
+		// 						->orderBy('nomLigne')->orderBy('nomVoie')->orderBy('pkd')
+		//  						->get();
 		$this->latStart = 48.367;
 		$this->lonStart = -4.1598;
 		$this->latTop = $this->latStart + 0.2;
@@ -99,7 +104,7 @@ class RouteGeneratorController extends Controller
 		$this->lonRight = $this->lonStart + 0.2;
 		// /\ DEBUG /\
 
-        $this->routePropreties = [
+        $this->routeProperties = [
             "GUIDs" => $this->generateGUID(),
             "name" => [
                 "fr" => $this->routeName,
@@ -120,12 +125,12 @@ class RouteGeneratorController extends Controller
 			$rayonCourbeSegment = ($segment->sens !== "ALIGNEMENT" ? intval($segment->rayon) : -1);
 			$coordUTMDepartSegment = $this->convertGeodeticToUTM(floatval($segment->Xd), floatval($segment->Zd));
 			$coordUTMFinSegment = $this->convertGeodeticToUTM(floatval($segment->Xf), floatval($segment->Zf));
-			$segDepXRel = $coordUTMDepartSegment["X"] - $this->routePropreties["mapOffset"]["X"];
-			$segDepZRel = $coordUTMDepartSegment["Z"] - $this->routePropreties["mapOffset"]["Z"];
-			$segFinXRel = $coordUTMFinSegment["X"] - $this->routePropreties["mapOffset"]["X"];
-			$segFinZRel = $coordUTMFinSegment["Z"] - $this->routePropreties["mapOffset"]["Z"];
+			$segDepXRel = $coordUTMDepartSegment["X"] - $this->routeProperties["mapOffset"]["X"];
+			$segDepZRel = $coordUTMDepartSegment["Z"] - $this->routeProperties["mapOffset"]["Z"];
+			$segFinXRel = $coordUTMFinSegment["X"] - $this->routeProperties["mapOffset"]["X"];
+			$segFinZRel = $coordUTMFinSegment["Z"] - $this->routeProperties["mapOffset"]["Z"];
 			if ($segment->sens === "ALIGNEMENT")
-				$longueurSegment = sqrt(abs($segment->Xf_L93 - $segment->Xd_L93) ** 2 + abs($segment->Zf_L93 - $segment->Zd_L93) ** 2);
+				$longueurSegment = sqrt(abs($coordUTMFinSegment["X"] - $coordUTMDepartSegment["X"]) ** 2 + abs($coordUTMFinSegment["Z"] - $coordUTMDepartSegment["Z"]) ** 2);
 			else
 				$longueurSegment = abs($this->pkProcessing($segment->pkf) - $this->pkProcessing($segment->pkd));
 
@@ -147,7 +152,7 @@ class RouteGeneratorController extends Controller
 			];
 		}
 
-		$routeDirectory = "tsni/generatedRoutes/{$this->routePropreties["GUIDs"][2]}";
+		$routeDirectory = "tsni/generatedRoutes/{$this->routeProperties["GUIDs"][2]}";
 		Storage::makeDirectory($routeDirectory);
 		Storage::makeDirectory("{$routeDirectory}/Networks");
 		Storage::makeDirectory("{$routeDirectory}/Networks/Track Tiles");
@@ -159,19 +164,37 @@ class RouteGeneratorController extends Controller
 
 		
 		// GENERATION FICHIER ROUTEPROPERTIES
-		$xml = view('tsni.files.route_properties', ["route" => $this->routePropreties])->render();
+		$xml = view('tsni.files.route_properties', ["route" => $this->routeProperties])->render();
 		Storage::put("{$routeDirectory}/RouteProperties.xml", $xml);
 
 
 		// GENERATION FICHIERS TRACK TILES
 		foreach ($segmentsBDD as $key => $segment) {
+			if ($key > 0 && $segment["sensCourbe"] !== "ALIGNEMENT") {
+				$precedAngle = fmod(deg2rad($this->segmentPrecedent["angle"]), 2* pi());
+				if ($precedAngle < 0)
+					$precedAngle += 2*pi();
+				$currAngle = fmod((new Complex($segment["segFinX"] - $segment["segDepX"], $segment["segFinZ"] - $segment["segDepZ"]))->arg(), 2* pi());
+				if ($currAngle < 0)
+					$currAngle += 2*pi();
+
+				if ($currAngle - $precedAngle > 0.1)
+					$segment["sensCourbe"] = "GAUCHE";
+				else {
+					if ($currAngle - $precedAngle < -0.1)
+						$segment["sensCourbe"] = "DROITE";
+					else
+						Log::channel('tsni')->warning("Contrôle direction non concluant");
+				}
+			}
+
 			$this->segmentPrecedent["GUIDs"] = null;
 
 			if ($segment["sensCourbe"] === "ALIGNEMENT") {
 				$angle = 0;
 
 				if ($segment["longueur"] > 0)
-					$angle = rad2deg(acos(($segment["segFinX"] - $segment["segDepX"]) / $segment["longueur"]));
+					$angle = (($segment["segFinZ"] - $segment["segDepZ"]) >= 0 ? 1 : -1) * rad2deg(acos(($segment["segFinX"] - $segment["segDepX"]) / $segment["longueur"]));
 				else
 					Log::channel('tsni')->error("Division par 0 (longueur), segment: {segment}", ['segment' => $segment]);
 			}
@@ -199,20 +222,9 @@ class RouteGeneratorController extends Controller
 				else
 					$T = -1;
 
-				if ($zF->abs() > 0)
-					$angleTemp = ($segtpZ >= 0 ? 1 : -1) * acos($segtpX / $zF->abs());
-				else
-					Log::channel('tsni')->error("Division par 0 (module(z(F)), segment: {segment}", ['segment' => $segment]);
-
-				$exp_term = new Complex(cos($angleTemp), sin($angleTemp));
 				$i_complex = new Complex(0, 1);
-				$exp_term_i = $exp_term->multiply($i_complex);
-				$zC = $zU->add($W->multiply($exp_term_i)->multiply($this->S)->multiply($T));
-
-				$centreX = $zC->r;
-				$centreZ = $zC->i;
-				$angleTemp = ($centreZ >= 0 ? 1 : -1) * acos($centreX / $zC->abs());
-				$zA = $exp_term_i->multiply($this->S);
+				$zC = $zU->add($zF->divide($zF->abs())->multiply($W)->multiply($i_complex)->multiply($this->S)->multiply($T));
+				$zA = $zC->multiply($i_complex)->multiply(-$this->S);
 				$aX = $zA->r;
 				$aZ = $zA->i;
 				$angle = rad2deg(($aZ >= 0 ? 1 : -1) * acos($aX / $zA->abs()));
@@ -221,7 +233,7 @@ class RouteGeneratorController extends Controller
 			if ($key > 0 && $segment["nomLigne"] === $this->segmentPrecedent["nomLigne"] && $segment["numVoie"] === $this->segmentPrecedent["numVoie"]) { /* Ignorer si premier segment */
 				if ($this->segmentPrecedent["pkf"] !== $segment["pkd"])
 					Log::channel('tsni')->error("Discontinuité : segment n°{key}, segDepX = {segDepX}, segDepZ = {segDepZ}", ['key' => $key, 'segDepX' => $segment["segDepX"], 'segDepZ' => $segment["segDepZ"]]);
-				elseif (abs($angleTemp - $this->segmentPrecedent["angle"]) >= 0.00001 && abs($angleTemp - $this->segmentPrecedent["angle"]) <= 0.5)
+				elseif (abs($angle - $this->segmentPrecedent["angle"]) >= 0.00001 && abs($angle - $this->segmentPrecedent["angle"]) <= 0.5)
 					Log::channel('tsni')->error("Rupture angle : segment n°{key}, segDepX = {segDepX}, segDepZ = {segDepZ}", ['key' => $key, 'segDepX' => $segment["segDepX"], 'segDepZ' => $segment["segDepZ"]]);
 			}
 
@@ -303,10 +315,10 @@ class RouteGeneratorController extends Controller
 				return array_search($a["id"], $tile["segmentsIds"]) - array_search($b["id"], $tile["segmentsIds"]);
 			});	// Merci ChatGPT
 
-			$segmentPrecedentRibonId = null;
+			$segmentPrecedentRibbonId = null;
 			foreach ($tileSegments as $key => $segment) {
 				// Création d'un nouveau ruban dans la liste
-				if ($segment["rubanId"] !== $segmentPrecedentRibonId) {
+				if ($segment["rubanId"] !== $segmentPrecedentRibbonId) {
 					$trackTileTemplateData[] = [
 						"id" => $this->generateID(), 
 						"GUIDs" => $segment["rubanGUIDs"], 
@@ -314,7 +326,7 @@ class RouteGeneratorController extends Controller
 						"rayonCourbe" => $segment["rayonCourbe"], 
 						"curves" => []
 					];
-					$segmentPrecedentRibonId = $segment["rubanId"];
+					$segmentPrecedentRibbonId = $segment["rubanId"];
 				}
 				// Ajout d'un segment au dernier ruban défini
 				$trackTileTemplateData[count($trackTileTemplateData) - 1]["curves"][] = [
@@ -331,9 +343,23 @@ class RouteGeneratorController extends Controller
 				];
 			}
 
-			foreach ($trackTileTemplateData as $key => $tile) {
-				$xml = view('tsni.files.track_tile_template', ["rubans" => [$tile]])->render();
-				Storage::put("{$routeDirectory}/Networks/Track Tiles/".$this->newTrackTileFile($tile["curves"][0]["tileX"], $tile["curves"][0]["tileZ"]), $xml);
+			foreach ($this->tilesList as $tile) {
+				$trackTileTemplateDataCopy = $trackTileTemplateData;
+				foreach ($trackTileTemplateData as $keyRuban => $ruban) {
+					$nbSegmentRestant = 0;
+					foreach ($ruban["curves"] as $keySegment => $segment) {
+						if ($segment["tileX"] !== $tile["X"] || $segment["tileZ"] !== $tile["Z"])
+							unset($trackTileTemplateDataCopy[$keyRuban]["curves"][$keySegment]);
+						else
+							$nbSegmentRestant++;
+					}
+					if ($nbSegmentRestant === 0) {
+						unset($trackTileTemplateDataCopy[$keyRuban]);
+					}
+				}
+
+				$xml = view('tsni.files.track_tile_template', ["rubans" => $trackTileTemplateDataCopy])->render();
+				Storage::put("{$routeDirectory}/Networks/Track Tiles/".$this->newTrackTileFile($tile["X"], $tile["Z"]), $xml);
 			}
 
 
@@ -346,7 +372,7 @@ class RouteGeneratorController extends Controller
 			$qualitesVoie = [];
 			$vitesseAuto = false;
 			
-			$rubansFormated = [];
+			$rubansFormatred = [];
 
 			$trackNetworkGUIDs = $this->generateGUID();
 
@@ -382,7 +408,7 @@ class RouteGeneratorController extends Controller
 
 				$ribbonProps = ["id" => $rubanId, "GUIDs" => $ruban["GUIDs"], "heights" => $ribHeights, "longueur" => $ribLongueur, "tileX" => $tileX, "tileZ" => $tileZ, "coordRelX" => $tileRelRibDepX, "coordRelZ" => $tileRelRibDepZ, 
 					"extentX" => $ribExtentX, "extentZ" => $ribExtentZ, "regleVoie" => $this->trackRuleBlueprint, "typeVoie" => $this->trackBlueprint, "vitesses" => $vitesses, "electrification" => $ribElec, "qualite" => $ribQual];
-				$rubansFormated[] = $ribbonProps;
+				$rubansFormatred[] = $ribbonProps;
 			}
 
 			$extremitesTraitees = [];
@@ -390,7 +416,7 @@ class RouteGeneratorController extends Controller
 				$extremitesTraitees[$ruban["id"]] = [ "0" => false, "1" => false];
 			}
 
-			$nodesFormated = [];
+			$nodesFormatted = [];
 			foreach ($this->rubans as $key => $ruban) {
 				// Log::channel('tsni')->info("Execution de la boucle foreach ribbon1");
 				$ribPos0 = ["X" => $ruban["tileX"] * 1024 + $ruban["coordRelX"], "Z" => $ruban["tileZ"] * 1024 + $ruban["coordRelZ"]];
@@ -441,7 +467,7 @@ class RouteGeneratorController extends Controller
 					// }
 
 					if (count($nodeExtrems) > 0) {
-						$nodesFormated[] = ["id" => $this->generateID(), "extremites" => $nodeExtrems];
+						$nodesFormatted[] = ["id" => $this->generateID(), "extremites" => $nodeExtrems];
 					}
 				}
 			}
@@ -450,8 +476,8 @@ class RouteGeneratorController extends Controller
 				"trackNetwork" => [
 					"id" => $this->generateID(),
 					"GUIDs" => $this->generateGUID(),
-					"rubans" => $rubansFormated,
-					"nodes" => $nodesFormated,
+					"rubans" => $rubansFormatred,
+					"nodes" => $nodesFormatted,
 				],
 			];
 
@@ -468,7 +494,7 @@ class RouteGeneratorController extends Controller
 		return $n;
     }
 
-    private function generateID($type = "dec", $lenght = 9): string {
+    private function generateID($type = "dec", $length = 9): string {
         $randomID = "";
 		switch ($type) {
 			case 'devStr':
@@ -485,7 +511,7 @@ class RouteGeneratorController extends Controller
 				break;
 			case 'dec':
 			default:
-				for ($char = 1; $char <= $lenght; $char++) {
+				for ($char = 1; $char <= $length; $char++) {
 					if ($char === 1)
 						$randomID .= rand(1,9);
 					else
@@ -565,6 +591,7 @@ class RouteGeneratorController extends Controller
 		$sensCourbe = $segment["sensCourbe"];
 		$rayonCourbe = $segment["rayonCourbe"];
 		$coupes = [];
+		$coupePrecedente = [];
 
 		$nbCoupes = floor($longueur / 500);
 		$longueurDernCoupe = fmod($longueur, 500);
@@ -578,9 +605,9 @@ class RouteGeneratorController extends Controller
 				$longueur = $longueurDernCoupe;
 
 			if ($coupe > 1) {
-				$segDepX = $this->segmentPrecedent["X"];
-				$segDepZ = $this->segmentPrecedent["Z"];
-				$angle = $this->segmentPrecedent["angle"];
+				$segDepX = $coupePrecedente["X"];
+				$segDepZ = $coupePrecedente["Z"];
+				$angle = $coupePrecedente["angle"];
 			}
 
 			$tileCoord = $this->getTileCoordAndSegRelCoord($segDepX, $segDepZ);
@@ -592,14 +619,14 @@ class RouteGeneratorController extends Controller
 			$segmentId = $this->generateID();
 
 			if ($sensCourbe !== "ALIGNEMENT") {
-				$varDir = rad2deg($segment["longueur"] / $segment["rayonCourbe"]);
-				$this->segmentPrecedent["angle"] = $angle + $varDir + $this->S;
-				$this->segmentPrecedent["X"] = $segDepX + (-cos(deg2rad($angle - 90 * $this->S)) + cos(deg2rad($this->segmentPrecedent["angle"] - 90 * $this->S))) * $rayonCourbe;
-				$this->segmentPrecedent["Z"] = $segDepZ + (-sin(deg2rad($angle - 90 * $this->S)) + sin(deg2rad($this->segmentPrecedent["angle"] - 90 * $this->S))) * $rayonCourbe;
+				$varDir = rad2deg($longueur / $segment["rayonCourbe"]);
+				$coupePrecedente["angle"] = $angle + $varDir * $this->S;
+				$coupePrecedente["X"] = $segDepX + (-cos(deg2rad($angle - 90 * $this->S)) + cos(deg2rad($coupePrecedente["angle"] - 90 * $this->S))) * $rayonCourbe;
+				$coupePrecedente["Z"] = $segDepZ + (-sin(deg2rad($angle - 90 * $this->S)) + sin(deg2rad($coupePrecedente["angle"] - 90 * $this->S))) * $rayonCourbe;
 			} else {
-				$this->segmentPrecedent["angle"] = $angle;
-				$this->segmentPrecedent["X"] = $segDepX + cos(deg2rad($angle)) * $longueur;
-				$this->segmentPrecedent["Z"] = $segDepZ + sin(deg2rad($angle)) * $longueur;
+				$coupePrecedente["angle"] = $angle;
+				$coupePrecedente["X"] = $segDepX + cos(deg2rad($angle)) * $longueur;
+				$coupePrecedente["Z"] = $segDepZ + sin(deg2rad($angle)) * $longueur;
 			}
 
 			$coupes[] = ["id" => $segmentId, "rubanId" => $segment["rubanId"], "rubanGUIDs" => $segment["rubanGUIDs"], "sensCourbe" => $sensCourbe, "rayonCourbe" => $rayonCourbe, 
@@ -619,5 +646,45 @@ class RouteGeneratorController extends Controller
 
 	private function segmentContainsId($var): bool {
 		return $var["id"];
+	}
+
+	/*private function isSurroundedByStraight($segment) {
+		
+		FONCTIONNEMENT A DEFINIR !
+
+	}*/
+
+	private function calculRaccordParabolique($vitesse, $rayon, Complex $Apos, Complex $Dpos, $Adir, $Ddir, $Ax, $Ay, $sens) {
+		// 1 : Evaluer le dévers
+		$d = 11.8 * ($vitesse**2 / $rayon); // ... - I
+		// Controle résultat....
+
+
+		// 2 : Evaluer le gauche dans le raccordement (vitesse d’inclinaison)
+		$i = (180 / $vitesse) < 5 ? (180 / $vitesse) : (216 / $vitesse);
+
+		// 3 : Calculer le point final par itération jusqu’à atteindre l’objectif
+		do {
+			$p = $d / (2 * $i);
+			$Opos = (new Complex($p, $sens * ($p**2 / (6*$rayon) + $rayon)))->multiply(new Complex(cos($Adir), sin($Adir)))->add(new Complex($Ax, $Ay));
+			$Bpos = (new Complex(2 * $p, $sens * ((2 * $p**2) / (3 * $rayon))))->multiply(new Complex(cos($Adir), sin($Adir)))->add(new Complex($Ax, $Ay));
+			$R = $Bpos->subtract($Opos);
+			$alpha = $R->arg() - (3 * pi()) / 2 * $sens - $Adir;
+			$theta = $Ddir - $Adir;
+			$beta = $theta - 2 * $alpha;
+			$Cpos = $R->multiply(new Complex(cos($beta), sin($beta)))->add($Opos);
+			$Cdir = $Adir + $alpha + $beta;
+			$u = $Bpos->subtract($Apos);
+			$alpha2 = $u->arg() - $Adir;
+			$alpha3 = $alpha - $alpha2;
+			$v = $Cpos->subtract($Bpos);
+			$w = (new Complex(cos($Cdir + $alpha3), sin($Cdir + $alpha3)))->multiply($u->abs());
+			$erreur = $Apos->add($u)->add($v)->add($w)->subtract($Dpos)->abs() * 1000;
+
+			if ($erreur > 0)
+				$d += $erreur * 1;
+			else
+				$d -= $erreur * 1;
+		} while ($erreur > -1 && $erreur < 1);
 	}
 }
